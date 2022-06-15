@@ -1,0 +1,7 @@
+layout blade:
+
+@yeild cria secção
+
+@se
+
+@extension

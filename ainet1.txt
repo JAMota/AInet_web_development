@@ -1,0 +1,87 @@
+html tem tags:
+
+imagem - <img src_" " alt=" ">
+
+o alt serve para screen readers
+
+paragrafos - <p> </p>
+
+titulos - <h1> </h1>
+	  <h6> </h6>
+
+hiperligações - <a href=" ">  </a>
+
+quebra de linha - <br>
+
+linha horizontal - <hr>
+
+lista nao ordernada - <ul> </ul>
+lista ordernada - <ol> </ol>
+lista elementos - <il> </il>
+
+tabelas celulas dados - <ta> </ta>
+tabelas celulas titulos- <th> </th>
+tabelas linhas - <tr> </tr>
+tabelas tabela - <table> </table>
+tabelas secçoes - <
+
+
+tags para cirar secções
+	sem semnatica - <div> </div> e <span> </span>
+
+	com semantica - <header> </header>
+			<footer> </footer>
+			....
+
+<form action=" " method="get">
+
+a label serve para fazer a legenda do controlo
+
+<label for= "idlabel"> </label>
+
+controlos: <input type="text/password/number... ">
+
+
+	drop down list: <select id=" " name=" ">
+				<option> </option>
+			</select>
+
+	<textarea id=" " name=" "> </textarea>
+
+
+
+
+Estrutura de doc html:
+<!Doctype html>
+<html>
+ <head>
+   <title> </title>
+   <link ref="stylesheet" href="">
+
+ </head>
+
+
+dentre de uma area de navegação vem sempre uma lista nao ordenada que depois é formatada no css
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

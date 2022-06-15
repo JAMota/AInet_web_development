@@ -1,0 +1,97 @@
+Gestão dos géneros
+- Criar a policy GeneroPolicy: php artisan make:policy GeneroPolicy --model=Genero
+- Criar o request  GeneroPost: php artisan make:request GeneroPost
+              - Colocar apenas code (deve ser único) e nome
+              - não esquecer de no método authorize alterar: return true
+- Criar controlador GeneroController e copiar código do CursoController: php artisan make:controller GeneroController
+              - Onde está: Curso mudar para  Genero
+                           curso mudar para genero
+              - método index pode ser apagado
+              - ajustar o método de destroy
+- Criar rotas
+          - Copiar rotas dos cursos:
+                     alterar onde está Curso para Genero e curso para genero    
+- Crias vistas
+          - Copiar vistas dos cursos e renomear para generos
+                  - apagar vista index
+                  - alterar vistas edit.blade.php e create.blade.php
+                         onde está curso mudar para genero
+          - na vista edit.blade.php
+                         alterar onde está abreviatura para code
+                  - alterar vista parcial create-edit.blade.php
+                         deixar apenas campos com nomes code e nome
+              - alterar vista admin.blade.php
+                         alterar onde está Curso para Genero e curso para genero
+                         na tabela alterar campos a apresentar e campos do foreach
+
+ 
+
+Gestão das salas
+- Criar a policy SalaPolicy: php artisan make:policy SalaPolicy --model=Sala
+- Criar o request  SalaPost
+              - Colocar apenas nome
+              - não esquecer de no método authorize alterar: return true
+- Criar controlador   SalaController e copiar código do CursoController
+              - Onde está: Curso mudar para  Sala
+                           curso mudar para sala
+              - método index pode/ ou não ser implementado
+- Criar rotas
+          - Copiar rotas dos cursos:
+             alterar onde está Curso para Sala e curso para sala
+- Crias vistas
+          - Copiar vistas dos cursos e renomear para salas
+                  - apagar vista index
+                  - alterar vistas edit.blade.php e create.blade.php
+                         onde está curso mudar para sala
+                  - alterar vista parcial create-edit.blade.php
+                         deixar apenas campo do nome
+              - alterar vista admin.blade.php
+                         alterar onde está Curso para Sala e curso para sala
+                         na tabela alterar campos a apresentar e campos do foreach
+
+ 
+
+
+Gestão dos filmes  ---- a partir da gestão das disciplinas
+- Criar a policy FilmePolicy
+- Criar o request  FilmePost
+              - Colocar os campos do form, incluindo o cartaz_url
+              - não esquecer de no método authorize alterar: return true
+- Criar controlador   GeneroController e copiar código do DisciplinaController
+              - Onde está: Disciplina mudar para  Filme
+                           disciplina mudar para Filme
+                           Curso mudar para Genero
+                           curso mudar para generos
+              - método index tem de ser alterado para mostra os filmes em cartaz
+              - Copiar código de guardar url_foto do AlunoController do método store para o método store do FilmeController
+                      mudar url_foto para cartaz_url
+                      mudar $newUser para $filme
+                      mudar 'public/fotos' para 'public/cartazes'
+              verificar nome dado na vista e mudar onde está foto
+          - Copiar código de guardar url_foto do AlunoController do método update para o método update do FilmeController
+              mudar url_foto para cartaz_url
+                      mudar $aluno->user para $filme
+                      mudar 'public/fotos' para 'public/cartazes'
+              verificar nome dado na vista e mudar onde está foto
+- Criar rotas
+          - Copiar rotas das disciplinas e alterar onde está Disciplina para Filme e disciplina para filme
+- Crias vistas
+          - Copiar vistas das disciplinas e renomear para filmes
+                  - apagar vista index
+                  - alterar vistas edit.blade.php e create.blade.php
+                         onde está disciplina mudar para filme
+                         acrescentar ao form: enctype="multipart/form-data"
+          - na vista edit.blade.php
+                         acrescentar código para se visualizar o cartaz (o filme tem sempre cartaz, logo não é precisa rota para apagar)
+                  - alterar vista parcial create-edit.blade.php
+                         deixar apenas campos titulo, genero_code (fazer com base no select que mostra os cursos), ano, sumario, trailer_url, cartaz_url
+
+
+adicionar campos de comfirmar password no blade
+create edit tem o username, o tipo, etc, e temos de adicionar as passwords
+
+Valorisa a criação de lugar seja automatica (Pedir fila e numero de lugares, se for com validação pedir tambem o lugar inicial)
+
+Pedir a password na criação do create-blade.php
+
+Funcionalidade extras: restaurar os generos apagados, é preciso usar o get all com o --withTrashed para ver os apagados

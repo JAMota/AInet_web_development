@@ -1,0 +1,179 @@
+1- Criar novo projeto:
+      Botão direito sobre laragon - Quick app - Laravel
+2- Abrir ficheiro .env e alterar o nome da base de dados para a BD correta.
+3- Apagar pasta database do projeto. Descompactar pasta database fornecida pelo professor e copiar para a pasta do projeto.
+4- Criar link simbólico:
+    - Posicionar na pasta do projeto e executar: php artisan storage:link
+5- Migrar a BD e gerar dados:
+    - Executar:
+             php artisan migrate:fresh
+             composer dump-autoload
+             php artisan db:seed             
+                    - se der erro com datas, ir ao ficheiro "config/app.php" e mudar 'timezone' => 'Europe/Lisbon';
+                       - voltar a repetir os 3 comandos
+6- Instalar package de autenticação:
+     - Executar:
+             composer require laravel/ui
+             php artisan ui bootstrap --auth
+             npm install
+             npm run dev (se der erro executar: composer update, e voltar a executar: npm run dev)
+7- Colocar rota/vista do dashboard a funcionar:
+     - Copiar pastas "css", "js" e "vendor" da pasta "public" do projeto das aulas para o projeto.
+     - Copiar as imagens "logo.png" e "default_img.png" da pasta "public/img" para para pasta "public/img" do projeto
+     - Copiar da pasta "resources/views" a vista "layout_admin.blade.php" e as pastas "dashboard" e "partials".
+     - Modificar a vista layout_admin.blade.php:
+           - Mudar onde está "url_foto" para "foto_url"
+           - Será necessário procurar por {{route('...')}} e apagar a referência a todas as rotas que ainda não existem (deixar logout/login e dashboard).
+            Apagar todos os nav-item que fazem referência a alunos/disciplinas/docentes e cursos
+                               @can('viewAny',...)    ----->apagar
+                   @endcan
+           - A parte do "tipo" também terá de ser alterada depois de criadas as rotas.
+     - Copiar o controlador DashboardController da pasta "app/http/controllers" para a pasta"app/http/controllers" do projeto
+     - Copiar a rota "admin.dashboard" do ficheiro "routes/web.php" para o ficheiro "web.php" do projeto.
+        Route::middleware(['auth','verified'])->prefix('admin')->name('admin.')->group(function () {
+               // dashboard
+               Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        });
+                ...
+        Não esquecer de importar a classe do DashBoardController
+     - Verificar no browser se a rota do dashboad funciona: http://url/admin
+8- Criar modelos e colocar:
+     use SoftDeletes; //se tabela tiver coluna deleted_at
+     protected $table="nomeTabela"; //se nome da tabela não corresponder ao plural do modelo
+     protected $primaryKey="nomeChave"; //se chave primária não for id
+     protected $keyType="string"; //se chave primária for string
+     public $incrementing=false; //se chave primária não for auto increment
+     public $timestamps=false; //se não tiver colunas $created_at e $updated_at;
+     protected $fillable =['campo1', 'campo2',...]; //com todos os campos que poderão ser preenchidos através de formulários
+     Métodos - Relacionamentos para todas as tabelas:
+          1:1  (hasOne e belongsTo)
+          1:N  (belongsTo e hasMany)
+          N:M  (belongsToMany e belongsToMany)
+9- Criar controladores e Vista
+
+
+/*Verificação de email:
+ 1- Ativar a rota - em cima
+ 2- Aplicar o middleware 'verified' em cima  middleware(['auth','verified'])
+ 3- No Modelo User acrescentar implements MustVerifyEmail
+ 4- Configurar o email:
+    Criar um email no mailtrap.io e copiar credenciais para o ficheiro .env
+ 5- Se criaram rota para registar user, após guardar novo user enviar email:
+    $newUser->sendEmailVerificationNotification();
+*/
+---------------------------------------------------------------------//-------------------------------------
+PasswordPost
+
+public function rules(){
+	return ['old_password' => ['required', new VerifyPassword()]],
+	'password'=>
+}
+
+verifyPassword.php
+
+public function passes($attribute, $value){
+	return Hash
+}
+
+VerifyPassword
+1-no modelo user acrescentar à frente da class ClassUser implements MustVerifyEmail
+2-ativar a rota:
+	Auth::routes('verify'=>true);
+3-configurar Email: mailTrap.io
+				Autenticar-se - ir a demo inbox 
+						-escolher Laravel
+						-copiar configurações
+						-substituir no ficheiro .env as configurações(deixar as ultimas 2)
+4-ativar middleware
+	route::midleware(['auth', 'verified'])
+5-Nas rotas (depende se fomos nos a criar as rotas - so para rotas criadas por nos)
+	Nas rotas de store depois de criarem user/cliente $newUser-> sendEmailVerificationNotification	
+
+------------------------------------------------------------------//--------------------------------------
+Gestão dos géneros
+- Criar a policy GeneroPolicy: php artisan make:policy GeneroPolicy --model=Genero
+- Criar o request  GeneroPost: php artisan make:request GeneroPost
+              - Colocar apenas code (deve ser único) e nome
+              - não esquecer de no método authorize alterar: return true
+- Criar controlador GeneroController e copiar código do CursoController: php artisan make:controller GeneroController
+              - Onde está: Curso mudar para  Genero
+                           curso mudar para genero
+              - método index pode ser apagado
+              - ajustar o método de destroy
+- Criar rotas
+          - Copiar rotas dos cursos:
+                     alterar onde está Curso para Genero e curso para genero    
+- Crias vistas
+          - Copiar vistas dos cursos e renomear para generos
+                  - apagar vista index
+                  - alterar vistas edit.blade.php e create.blade.php
+                         onde está curso mudar para genero
+          - na vista edit.blade.php
+                         alterar onde está abreviatura para code
+                  - alterar vista parcial create-edit.blade.php
+                         deixar apenas campos com nomes code e nome
+              - alterar vista admin.blade.php
+                         alterar onde está Curso para Genero e curso para genero
+                         na tabela alterar campos a apresentar e campos do foreach
+
+ 
+
+Gestão das salas
+- Criar a policy SalaPolicy: php artisan make:policy SalaPolicy --model=Sala
+- Criar o request  SalaPost
+              - Colocar apenas nome
+              - não esquecer de no método authorize alterar: return true
+- Criar controlador   SalaController e copiar código do CursoController
+              - Onde está: Curso mudar para  Sala
+                           curso mudar para sala
+              - método index pode/ ou não ser implementado
+- Criar rotas
+          - Copiar rotas dos cursos:
+             alterar onde está Curso para Sala e curso para sala
+- Crias vistas
+          - Copiar vistas dos cursos e renomear para salas
+                  - apagar vista index
+                  - alterar vistas edit.blade.php e create.blade.php
+                         onde está curso mudar para sala
+                  - alterar vista parcial create-edit.blade.php
+                         deixar apenas campo do nome
+              - alterar vista admin.blade.php
+                         alterar onde está Curso para Sala e curso para sala
+                         na tabela alterar campos a apresentar e campos do foreach
+
+ 
+
+
+Gestão dos filmes  ---- a partir da gestão das disciplinas
+- Criar a policy FilmePolicy
+- Criar o request  FilmePost
+              - Colocar os campos do form, incluindo o cartaz_url
+              - não esquecer de no método authorize alterar: return true
+- Criar controlador   GeneroController e copiar código do DisciplinaController
+              - Onde está: Disciplina mudar para  Filme
+                           disciplina mudar para Filme
+                           Curso mudar para Genero
+                           curso mudar para generos
+              - método index tem de ser alterado para mostra os filmes em cartaz
+              - Copiar código de guardar url_foto do AlunoController do método store para o método store do FilmeController
+                      mudar url_foto para cartaz_url
+                      mudar $newUser para $filme
+                      mudar 'public/fotos' para 'public/cartazes'
+              verificar nome dado na vista e mudar onde está foto
+          - Copiar código de guardar url_foto do AlunoController do método update para o método update do FilmeController
+              mudar url_foto para cartaz_url
+                      mudar $aluno->user para $filme
+                      mudar 'public/fotos' para 'public/cartazes'
+              verificar nome dado na vista e mudar onde está foto
+- Criar rotas
+          - Copiar rotas das disciplinas e alterar onde está Disciplina para Filme e disciplina para filme
+- Crias vistas
+          - Copiar vistas das disciplinas e renomear para filmes
+                  - apagar vista index
+                  - alterar vistas edit.blade.php e create.blade.php
+                         onde está disciplina mudar para filme
+                         acrescentar ao form: enctype="multipart/form-data"
+          - na vista edit.blade.php
+                         acrescentar código para se visualizar o cartaz (o filme tem sempre cartaz, logo não é precisa rota para apagar)
+                  - alterar vista parcial create-edit.blade.php
+                         deixar apenas campos titulo, genero_code (fazer com base no select que mostra os cursos), ano, sumario, trailer_url, cartaz_url		

@@ -1,0 +1,13 @@
+aceder a proriadade publica
+
+$obj-> nome_propriade
+
+//aceder a metodo publico
+$obj->exemplo()
+
+aceder a metodo estatico
+nomeClass::estatico()
+
+
+numero de pedidos get numa pagina com 3 imaganes
+são um pedido para cada imagem mais 1 para a pagina ou seja 4 pedidos

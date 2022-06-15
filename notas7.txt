@@ -1,0 +1,9 @@
+onsubmit="return" - server para fazer em js uma janela para confirmar dentro do form
+
+'abreviatura' => 'required|string|max:20|unique:cursos,abreviatura,'.$this->curso_abreviatura.',abreviatura',
+
+serve para fazer update a campo com chave primaria unica
+
+se as rotas nao tiverem mudado depois de um update: php artisan view:clear
+
+php artisan route:list serve para ver todas as rotas disponiveis

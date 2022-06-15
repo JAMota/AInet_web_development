@@ -1,0 +1,9 @@
+" " as variaveis sao interpretadas
+
+' ' as variaveis nao sao interpretadas e tem de ser concatenadas
+
+include e include_one : vai buscar o ficheiro mas não dá erro se este nao existir
+
+required e required_one :  vai buscar o ficheiro e dá erro se este nao existir
+
+o _one server para dar nao termos erros a incluir uma função duas vezes

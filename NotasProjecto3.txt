@@ -1,0 +1,9 @@
+ bilhete temos de tirar a hora atual tirar 5 minutos porque ainda podemos comprar o bilhete da sessao que começou a 5 ou menos minutos
+
+metodo de bloquer/desbloquear é um method patch
+
+no blade.php é como o delete
+
+o admin pode criar funcionarios e admins e temos de incluir qual é o tipo
+
+o cliente é giual ao aluno mas no final tribuimos o tipo C
