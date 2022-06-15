@@ -25,11 +25,10 @@ class UserPost extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|unique|string|max:255',
-            'password' => 'sometimes',
-            'tipo' => 'required|max:1',
-            'bloqueado'  => 'required|max:1',
-            'foto_url',
+            'email' => 'required|email|unique:users,email,'.$this->user_id,
+            'password' => 'sometimes|min:8,confirmed',
+            'tipo' => 'required|in:F,A',
+            'foto_url'=>'nullable|mimes:png,jpg|max:8192',
         ];
     }
 
@@ -39,7 +38,6 @@ class UserPost extends FormRequest
             'name.integer' => 'Campo "name  " tem que ser uma string com maximo de 255 characteres',
             'email.unique' => 'Campo "email" tem que ter unique(não pode ser partilhado entre contas)',
             'email.required' => 'Campo "email" tem que ser preenchido',
-            'email.integer' => 'Campo "email" tem que ser uma string com maximo de 255 characteres',
         ];
     }
 }

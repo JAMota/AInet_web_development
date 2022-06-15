@@ -50,20 +50,27 @@ class ClienteController extends Controller
         $newUser = new User;
         $newUser->email = $validated_data['email'];
         $newUser->name = $validated_data['name'];
-        $newUser->admin = false;
-        $newUser->tipo = 'C';
-        $newUser->genero = $validated_data['genero'];
+        #$newUser->tipo = 'C';
         $newUser->password = Hash::make($validated_data['password']);
-        if ($request->hasFile('foto')) {
-            $path = $request->foto->store('public/fotos');
+        if ($request->hasFile('foto_url')) {
+            $path = $request->foto_url->store('public/fotos');
             $newUser->foto_url = basename($path);
         }
         $newUser->save();
         $cliente = new Cliente;
-        $cliente->user_id = $newUser->id;
         $cliente->fill($validated_data);
+        $cliente->id = $newUser->id;
+        $cliente->nif = $validated_data['nif'];
+        #dd($validated_data);
+        $cliente->tipo_pagamento = $validated_data['tipo_pagamento'];
+
+
+        #dd($cliente);
+        #dd($cliente->id);
         $cliente->save();
         //mandar mail
+        $newUser -> sendEmailVerificationNotification();
+
         return redirect()->route('admin.clientes')
             ->with('alert-msg', 'Cliente "' . $validated_data['name'] . '" foi criado com sucesso!')
             ->with('alert-type', 'success');
@@ -74,10 +81,10 @@ class ClienteController extends Controller
         $validated_data = $request->validated();
         $cliente->user->email = $validated_data['email'];
         $cliente->user->name = $validated_data['name'];
-        $cliente->user->genero = $validated_data['genero'];
-        if ($request->hasFile('foto')) {
+        $cliente->fill($validated_data);
+        if ($request->hasFile('foto_url')) {
             Storage::delete('public/fotos/' . $cliente->user->foto_url);
-            $path = $request->foto->store('public/fotos');
+            $path = $request->foto_url->store('public/fotos');
             $cliente->user->foto_url = basename($path);
         }
         $cliente->user->save();

@@ -100,7 +100,7 @@ Route::delete('clientes/{cliente}', [ClienteController::class, 'destroy'])->name
 });
 
 //login
-Auth::routes(['verify=>true']);
+Auth::routes(['verify'=>true]);
 
 #register para todos os utilizadores nao autenticados
 //TODO tirar este butao se o utilizadar estiver logado

@@ -12,30 +12,33 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    public function edit_password(){
+    public function edit_password()
+    {
         return view('auth.password_change');
     }
-    public function update_password(PasswordPost $request){ #criar este post
-        $user=auth()->user();
-        $user->password=Hash::make($request->password);
+    public function update_password(PasswordPost $request)
+    { #criar este post
+        $user = auth()->user();
+        $user->password = Hash::make($request->password);
         $user->save();
         return redirect()->route('admin.dashboard')
-        ->with('alert-msg', 'Password alterada com sucesso')
-        ->with('alert-type','success');
+            ->with('alert-msg', 'Password alterada com sucesso')
+            ->with('alert-type', 'success');
     }
 
-    public function bloquear(User $user){ #criar este post
+    public function bloquear(User $user)
+    { #criar este post
 
-        if($user->bloqueado==0){
-            $user->bloqueado=1;
-        }else{
-            $user->bloqueado=0;
+        if ($user->bloqueado == 0) {
+            $user->bloqueado = 1;
+        } else {
+            $user->bloqueado = 0;
         }
 
         $user->save();
         return redirect()->back()
-        ->with('alert-msg', 'Estado do utilizador alterado')
-        ->with('alert-type','success');
+            ->with('alert-msg', 'Estado do utilizador alterado')
+            ->with('alert-type', 'success');
     }
 
 
@@ -47,8 +50,8 @@ class UserController extends Controller
         // Use Debugbar to compare both solutions
         // Comment one of the following 2 lines
 
-         $qry = User::query();
-
+        $qry = User::query();
+        $qry->whereIn('tipo', ['F', 'A']);
         if ($tipo) {
             $qry->where('tipo', $tipo);
         }
@@ -73,16 +76,14 @@ class UserController extends Controller
     {
         $validated_data = $request->validated();
         $newUser = new User;
-        $newUser->email = $validated_data['email'];
-        $newUser->name = $validated_data['name'];
-        $newUser->tipo = $validated_data['tipo'];
+        $newUser->fill($validated_data);
         $newUser->password = Hash::make($validated_data['password']);
         if ($request->hasFile('foto_url')) {
             $path = $request->foto_url->store('public/fotos');
             $newUser->foto_url = basename($path);
         }
         $newUser->save();
-        $newUser -> sendEmailVerificationNotification();
+        $newUser->sendEmailVerificationNotification();
         return redirect()->route('admin.users')
             ->with('alert-msg', 'User "' . $validated_data['name'] . '" foi criado com sucesso!')
             ->with('alert-type', 'success');
@@ -91,12 +92,10 @@ class UserController extends Controller
     public function update(UserPost $request, User $user)
     {
         $validated_data = $request->validated();
-        $newUser->email = $validated_data['email'];
-        $newUser->name = $validated_data['name'];
-        $newUser->tipo = $validated_data['tipo'];
+        $user->fill($validated_data);
         if ($request->hasFile('foto_url')) {
             Storage::delete('public/fotos/' . $user->url_foto);
-            $path = $request->foto->store('public/fotos');
+            $path = $request->foto_url->store('public/fotos');
             $user->foto_url = basename($path);
         }
         $user->user->save();

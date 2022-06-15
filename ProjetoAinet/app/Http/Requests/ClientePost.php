@@ -23,11 +23,32 @@ class ClientePost extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules="required_with:tipo_pagamento";
+        if($this->tipo_pagamento=='VISA'){
+            $rules.="|digits:16";
+        }elseif($this->tipo_pagamento=='PAYPAL'){
+            $rules.="|email";
+        }elseif($this->tipo_pagamento=='MBWAY'){
+            $rules.="|digits:9|regex:/9[1236][0-9]{7}/";
+        }
+        return [ //nao podemos adicionar mais regras de validação pq senao dá Validation rule unique requires at least 1 parameters.
             'nif' => 'string|max:8',
-            'email' => 'required|unique|string|max:255',
-            'tipo_pagamento',
+            'tipo_pagamento' => 'nullable|in:VISA,PAYPAL,MBWAY',
+            'ref_pagamento' => $rules,
+            'name' => 'required|string|max:255',
+            'email' => 'email|unique:users,email,'.$this->user_id,
+            'foto_url'=>'nullable|mimes:png,jpg|max:8192',
+            'password' => 'sometimes|min:8|confirmed',
 
         ];
     }
 }
+
+/*
+'name' => 'required|string|max:255',
+'email' => 'required|unique|string|max:255',
+'password' => 'sometimes',
+'tipo' => 'required|max:1',
+'bloqueado'  => 'required|max:1',
+'foto_url',
+*/

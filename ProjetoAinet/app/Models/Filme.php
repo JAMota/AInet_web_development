@@ -24,6 +24,7 @@ class Filme extends Model
 
     public function sessoes(){
         return $this->hasMany(Sessao::class,'filme_id','id');
+        /*return $this->hasMany(Sessao::class,'sessao_id','id'); penso que isto nao é preciso*/ 
     }
     public function genero(){
         return $this->belongsTo(Genero::class,'genero_code','code')->withTrashed();

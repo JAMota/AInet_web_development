@@ -17,8 +17,8 @@ class Cliente extends Model
     public $incrementing=false;
 
     protected $fillable = [
-        'nif' => 'required|max:9',
-        'tipo_pagamento' => 'required|string',
+        'nif' => 'string|max:9',
+        'tipo_pagamento' => 'string',
         'ref_pagamento',
     ];
 
