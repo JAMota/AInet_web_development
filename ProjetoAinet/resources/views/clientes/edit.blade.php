@@ -25,7 +25,7 @@
             @endcan
     </div>
     </form>
-    <form id="form_delete_photo" action="{{ route('admin.clientes.foto.destroy', ['cliente' => $cliente]) }}" method="POST">
+    <form id="form_delete_photo" action="{{ route('admin.users.foto.destroy', ['user' => $cliente->user]) }}" method="POST">
         @csrf
         @method('DELETE')
     </form>

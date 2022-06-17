@@ -106,14 +106,7 @@ class ClienteController extends Controller
             ->with('alert-msg', 'Cliente "' . $oldName . '" foi apagado com sucesso!')
             ->with('alert-type', 'success');
     }
-    public function destroy_foto(Cliente $cliente)
-    {
-        Storage::delete('public/fotos/' . $cliente->user->foto_url);
-        $cliente->user->foto_url = null;
-        $cliente->user->save();
-        return redirect()->route('admin.clientes.edit', ['cliente' => $cliente])
-            ->with('alert-msg', 'Foto do cliente "' . $cliente->user->name . '" foi removida!')
-            ->with('alert-type', 'success');
-    }
+
+
 
 }

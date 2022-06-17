@@ -7,6 +7,7 @@ use App\Http\Controllers\SalaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FilmeController;
 use App\Http\Controllers\GeneroController;
+use App\Http\Controllers\ReciboController;
 use App\Http\Controllers\SessaoController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\CarrinhoController;
@@ -99,6 +100,10 @@ Route::put('clientes/{cliente}', [ClienteController::class, 'update'])->name('cl
     ->middleware('can:update,cliente');
 Route::delete('clientes/{cliente}', [ClienteController::class, 'destroy'])->name('clientes.destroy')
     ->middleware('can:delete,cliente');
+
+    Route::delete('users/{user}/foto', [UserController::class, 'destroy_foto'])->name('users.foto.destroy')
+    ->middleware('can:update,cliente');
+
 
     Route::post('recibos', [ReciboController::class, 'store'])->name('recibos.store')
     ->middleware('isCliente');

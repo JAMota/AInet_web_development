@@ -20,7 +20,7 @@ class ReciboController extends Controller
     public function retrievePDF(Recibo $recibo)
     {
 
-        return Storage::file('pdf_recibos/' . $recibo->recibo_url);
+        return Storage::get('pdf_recibos/' . $recibo->recibo_url);
     }
 
     public function store(ReciboPost $request)

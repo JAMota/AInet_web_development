@@ -56,8 +56,6 @@ class CarrinhoController extends Controller
     public function confirmar(Request $request)
     {
         $cliente=auth()->user()->cliente;
-        //chamar vista com form: nome_cliente, nif, tipo_pagamento, ref_pagamento
-        //dd($cliente);
         return view('carrinho.confirmar',compact('cliente'));
     }
 
