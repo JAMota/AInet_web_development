@@ -85,6 +85,7 @@ class SessaoController extends Controller
     {
         $lugares=$sessao->sala->lugares;
         $filas=$sessao->sala->lugares()->distinct()->pluck('fila');
+
         return view('sessoes.show', compact('sessao', 'lugares','filas'));
     }
 }

@@ -1,7 +1,7 @@
 @extends('layout')
 @section('content')
 
-
+@if (count($carrinho))
 <div>
   <p>
         <form action="{{ route('carrinho.destroy') }}" method="POST">
@@ -11,14 +11,14 @@
         </form>
   </p>
   <p>
-        <form action="{{ route('carrinho.store') }}" method="POST">
+        <form action="{{ route('carrinho.confirmar') }}" method="POST">
             @csrf
             <input type="submit" value="Confirmar carrinho">
         </form>
   </p>
 </div>
 
-<table class="table table-bordered">
+<table class="table">
     <thead>
         <tr>
             <th>Titulo</th>
@@ -27,8 +27,7 @@
             <th>Hora</th>
             <th>Sala</th>
             <th>Lugar</th>
-            <th></th>
-            <th></th>
+
             <th></th>
         </tr>
     </thead>
@@ -38,8 +37,8 @@
         <td>{{ $row['titulo'] }} </td>
         <td>
             @if($row['cartaz_url'] )
-            <img src="{{ asset('storage/cartazes/'.$row['cartaz_url']) }}" alt="">
-
+            <img height="50" src="{{ asset('storage/cartazes/'.$row['cartaz_url']) }}" alt="">
+            @endif
             </td>
         <td>{{ $row['data'] }} </td>
         <td>{{ $row['horario_inicio'] }} </td>
@@ -59,5 +58,7 @@
     @endforeach
     </tbody>
 </table>
-
+@else
+Sem items no carrinho
+@endif
 @endsection

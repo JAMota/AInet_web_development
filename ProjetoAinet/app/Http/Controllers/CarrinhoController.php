@@ -57,6 +57,7 @@ class CarrinhoController extends Controller
     {
         $cliente=auth()->user()->cliente;
         //chamar vista com form: nome_cliente, nif, tipo_pagamento, ref_pagamento
+        return view('carrinho.comfirmar');
     }
 
     public function destroy(Request $request)
