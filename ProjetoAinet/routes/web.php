@@ -100,6 +100,9 @@ Route::put('clientes/{cliente}', [ClienteController::class, 'update'])->name('cl
 Route::delete('clientes/{cliente}', [ClienteController::class, 'destroy'])->name('clientes.destroy')
     ->middleware('can:delete,cliente');
 
+    Route::post('recibos', [ReciboController::class, 'store'])->name('recibos.store')
+    ->middleware('isCliente');
+
     //administracao de passwords/Alterar password
     Route::get('users/password',[UserController::class, 'edit_password'])->name('password.edit');
     Route::patch('users/password',[UserController::class, 'update_password'])->name('password.update');
