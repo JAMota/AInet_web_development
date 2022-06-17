@@ -29,7 +29,7 @@ class ClientePost extends FormRequest
         }elseif($this->tipo_pagamento=='PAYPAL'){
             $rules.="|email";
         }elseif($this->tipo_pagamento=='MBWAY'){
-            $rules.="|digits:9|regex:/9[1236][0-9]{7}/";
+            $rules.="|digits:9|regex:/(9[0-9]{8})/";
         }
         return [ //nao podemos adicionar mais regras de validação pq senao dá Validation rule unique requires at least 1 parameters.
             'nif' => 'string|max:8',

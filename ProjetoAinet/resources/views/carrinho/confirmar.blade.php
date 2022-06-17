@@ -1,8 +1,12 @@
+@extends('layout')
+@section('content')
+<form action="{{admin.recibos.store}}" method='post'>
+    @csrf
 <div class="form-group">
     <label for="inputNome">Nome</label>
-    <input type="text" class="form-control" name="name" id="inputNome"
-        value="{{ old('name', $cliente->user->name) }}">
-    @error('name')
+    <input type="text" class="form-control" name="nome_cliente" id="inputNome"
+        value="{{ old('nome_cliente', $cliente->user->name) }}">
+    @error('nome_cliente')
         <div class="small text-danger">{{ $message }}</div>
     @enderror
 </div>
@@ -42,3 +46,6 @@
         <div class="small text-danger">{{ $message }}</div>
     @enderror
 </div>
+</form>
+
+@endsection

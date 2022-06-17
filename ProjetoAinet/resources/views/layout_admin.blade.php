@@ -57,9 +57,9 @@
             <!-- Nav Item -->
             @can('viewAny', App\Models\Cliente::class)
                 <li class="nav-item {{ Route::currentRouteName() == 'admin.clientes' ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('admin.disciplinas') }}">
+                    <a class="nav-link" href="{{ route('admin.clientes') }}">
                         <i class="fas fa-fw fa-table"></i>
-                        <span>Disciplinas</span></a>
+                        <span>Clientes</span></a>
                 </li>
             @endcan
 
@@ -107,7 +107,7 @@
             <li class="nav-item {{ Route::currentRouteName() == 'admin.generos' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.generos') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Gestao de Generos</span></a>
+                    <span>Gestao de Salas</span></a>
             </li>
 
             <!-- Divider -->
@@ -117,7 +117,7 @@
             <li class="nav-item {{ Route::currentRouteName() == 'admin.generos' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.generos') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Gestao de Generos</span></a>
+                    <span>Gestao de Bilhetes</span></a>
             </li>
 
             <!-- Divider -->

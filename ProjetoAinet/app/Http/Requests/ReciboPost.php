@@ -13,7 +13,7 @@ class ReciboPost extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,19 @@ class ReciboPost extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
+        $rules="required_with:tipo_pagamento";
+        if($this->tipo_pagamento=='VISA'){
+            $rules.="|digits:16";
+        }elseif($this->tipo_pagamento=='PAYPAL'){
+            $rules.="|email";
+        }elseif($this->tipo_pagamento=='MBWAY'){
+            $rules.="|digits:9|regex:/(9[0-9]{8})/";
+        }
+        return [ //nao podemos adicionar mais regras de validação pq senao dá Validation rule unique requires at least 1 parameters.
+            'nif' => 'string|max:8',
+            'tipo_pagamento' => 'nullable|in:VISA,PAYPAL,MBWAY',
+            'ref_pagamento' => $rules,
+            'nome_cliente' => 'required|string|max:255',
         ];
     }
 }
