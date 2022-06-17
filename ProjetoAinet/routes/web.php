@@ -26,6 +26,11 @@ use App\Http\Controllers\DashboardController;
 Route::get('/', [FilmeController::class, 'index'])->name('home');
 Route::get('filmes/{filme}', [FilmeController::class, 'show'])->name('filmes.show');
 Route::get('sessoes/{sessao}', [SessaoController::class, 'show'])->name('sessoes.show');
+Route::get('carrinho', [CarrinhoController::class, 'index'])->name('carrinho.index');
+Route::post('carrinho/lugares/{sessao}/{lugar}', [CarrinhoController::class, 'store_bilhete'])->name('carrinho.store_bilhete');
+Route::delete('carrinho/lugares/{$id}', [CarrinhoController::class, 'destroy_bilhete'])->name('carrinho.destroy_bilhete');
+Route::post('carrinho', [CarrinhoController::class, 'confirmar'])->name('carrinho.confirmar')->middleware(['auth','verified','isBloqueado','isCliente']);
+Route::delete('carrinho', [CarrinhoController::class, 'destroy'])->name('carrinho.destroy');
 
 Route::middleware(['auth','verified','isBloqueado'])->prefix('admin')->name('admin.')->group(function () {
     // dashboard

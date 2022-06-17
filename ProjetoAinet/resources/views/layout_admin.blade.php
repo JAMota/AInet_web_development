@@ -54,16 +54,16 @@
 
 
 
-            <!-- Nav Item
-            @can('viewAny', App\Models\Disciplina::class)
-                <li class="nav-item {{ Route::currentRouteName() == 'admin.disciplinas' ? 'active' : '' }}">
+            <!-- Nav Item -->
+            @can('viewAny', App\Models\Cliente::class)
+                <li class="nav-item {{ Route::currentRouteName() == 'admin.clientes' ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('admin.disciplinas') }}">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Disciplinas</span></a>
                 </li>
-            @endcan -->
+            @endcan
 
-                        <!-- Nav Item -->
+            <!-- Nav Item -->
             @can('viewAny', App\Models\User::class)
                 <li class="nav-item {{ Route::currentRouteName() == 'users' ? 'bloqueado' : '' }}">
                     <a class="nav-link" href="{{ route('users') }}">
@@ -78,7 +78,7 @@
 
             <!-- Nav Item -->
             <li class="nav-item">
-                <a class="nav-link" href="{{url('/')}}">
+                <a class="nav-link" href="{{ url('/') }}">
                     <i class="fas fa-fw fa-home"></i>
                     <span>Parte Publica</span>
                 </a>
@@ -92,7 +92,39 @@
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
+
+            <!-- Nav Item - Generos -->
+            <li class="nav-item {{ Route::currentRouteName() == 'admin.generos' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.generos') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Gestao de Generos</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Nav Item - Generos -->
+            <li class="nav-item {{ Route::currentRouteName() == 'admin.generos' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.generos') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Gestao de Generos</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Nav Item - Generos -->
+            <li class="nav-item {{ Route::currentRouteName() == 'admin.generos' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.generos') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Gestao de Generos</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
         </ul>
+
+
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -129,18 +161,17 @@
                                     aria-labelledby="userDropdown">
                                     @if (auth()->user()->tipo == 'C')
                                         <a class="dropdown-item"
-                                            href="{{ route ('admin.clientes.edit', auth()->user()->cliente)}}">
+                                            href="{{ route('admin.clientes.edit', auth()->user()->cliente) }}">
                                             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                             Perfil
                                         </a>
                                         <div class="dropdown-divider"></div>
                                     @endif
-                                    <a class="dropdown-item"
-                                            href="{{route('admin.password.edit')}}">
-                                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                            Alterar Password
-                                        </a>
-                                        <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ route('admin.password.edit') }}">
+                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Alterar Password
+                                    </a>
+                                    <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Logout
@@ -219,7 +250,8 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault();
+                    <a class="btn btn-primary" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">Logout</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf

@@ -1,6 +1,5 @@
 @extends('layout')
 
-@section('header_bottom')
 
 @section('content')
     <div class="content_top">
@@ -34,7 +33,8 @@
                         @if ($sessao->bilhetes()->where('lugar_id', $lugar->id)->count())
                             <button class="ocupado" type="button" disabled>{{ $lugar->posicao }}</button>
                         @else
-                            <form action="" method="post" class="d-inline">
+                            <form action="{{route('carrinho.store_bilhete',['sessao'=>$sessao, 'lugar'=>$lugar])}}" method="post" class="d-inline">
+                                @csrf
                                 <button class="livre" type="submit">{{ $lugar->posicao }}</button>
                             </form>
                         @endif
@@ -44,4 +44,6 @@
             @endforeach
         </div>
     </div>
+
+
 @endsection
