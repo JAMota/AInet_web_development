@@ -1,12 +1,12 @@
 @extends('layout_admin')
-@section('title','Clientes' )
+@section('title','Users' )
 @section('content')
 <div class="row mb-3">
 
     <div class="col-9">
-        <form method="GET" action="{{route('admin.clientes')}}" class="form-group">
+        <form method="GET" action="{{route('admin.trabalhadores')}}" class="form-group">
             <div class="input-group">
-            <input type="text" name="pesq_name" value="{{old('pesq_name',$pesq_name) }}">
+            <input type="text" name="tipo" value="{{old('tipo',$tipo) }}">
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="submit">Filtrar</button>
             </div>
@@ -20,43 +20,43 @@
             <tr>
                 <th></th>
                 <th>Nome</th>
-                <th>NIF</th>
+                <th>Tipo</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($clientes as $cliente)
+            @foreach ($users as $user)
                 <tr>
                     <td>
-                        <img src="{{$cliente->user->foto_url ? asset('storage/fotos/' . $cliente->user->foto_url) : asset('img/default_img.png') }}" alt="Foto do cliente"  class="img-profile rounded-circle" style="width:40px;height:40px">
+                        <img src="{{$user->foto_url ? asset('storage/fotos/' . $user->foto_url) : asset('img/default_img.png') }}" alt="Foto do utilizador"  class="img-profile rounded-circle" style="width:40px;height:40px">
                     </td>
 
-                    <td>{{$cliente->user->name}}</td>
-                    <td>{{$cliente->NIF}}</td>
+                    <td>{{$user->name}}</td>
+
                     <td nowrap>
-                        @can('bloquear', $cliente->user)
-                        <form action="{{route('admin.bloqueado.update', ['user' => $cliente->user])}}" method="POST" class="d-inline"
+                        @can('bloquear', $user)
+                        <form action="{{route('admin.bloqueado.update', ['user' => $user])}}" method="POST" class="d-inline"
                             onsubmit="return confirm('Tem a certeza que deseja bloquear');">
                             @csrf
                             @method("patch")
                             <button type="submit" class="btn btn-primary btn-sm"><i
-                                class="fa  {{$cliente->user->bloqueado?'fa-lock':'fa-unlock'}}"></i></button>
+                                class="fa  {{$user->bloqueado?'fa-lock':'fa-unlock'}}"></i></button>
                         </form>
                         @else
                         <span class="btn btn-secondary btn-sm disabled"><i
-                            class="fa {{$cliente->user->bloqueado?'fa-lock':'fa-unlock'}}"></i></span>
+                            class="fa {{$user->bloqueado?'fa-lock':'fa-unlock'}}"></i></span>
 
                         @endcan
-                        @can('view', $cliente)
-                        <a href="{{ route('admin.clientes.edit', ['cliente' => $cliente]) }}"
+                        @can('view', $user)
+                        <a href="{{ route('admin.trabalhadoress.edit', ['user' => $user]) }}"
                             class="btn btn-primary btn-sm" role="button" aria-pressed="true"><i
-                                class="fa  @cannot('update',$cliente) fa-eye @else fa-pen @endcan"></i></a>
+                                class="fa  @cannot('update',$user) fa-eye @else fa-pen @endcan"></i></a>
                         @else
                         <span class="btn btn-secondary btn-sm disabled"><i
-                            class="fa @cannot('update',$cliente) fa-eye @else fa-pen @endcan"></i></span>
+                            class="fa @cannot('update',$user) fa-eye @else fa-pen @endcan"></i></span>
                         @endcan
-                        @can('delete', $cliente)
-                        <form action="{{route('admin.clientes.destroy', ['cliente' => $cliente])}}" method="POST" class="d-inline"
+                        @can('delete', $user)
+                        <form action="{{route('admin.trabalhadores.destroy', ['user' => $user])}}" method="POST" class="d-inline"
                             onsubmit="return confirm('Tem a certeza que deseja apagar o registo');">
                             @csrf
                             @method("DELETE")
@@ -71,6 +71,6 @@
             @endforeach
         </tbody>
     </table>
-    {{ $clientes->withQueryString()->links() }}
+    {{ $users->withQueryString()->links() }}
 @endsection
 
