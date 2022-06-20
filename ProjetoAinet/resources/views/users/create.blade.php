@@ -1,5 +1,5 @@
 @extends('layout_admin')
-@section('title', 'Novo Cliente')
+@section('title', 'Novo Trabalhador')
 @section('content')
     <form method="POST" action="{{ route('clientes') }}" class="form-group" enctype="multipart/form-data">
         @csrf

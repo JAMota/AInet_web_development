@@ -8,19 +8,25 @@
             <div class="input-group">
             <input type="text" name="tipo" value="{{old('tipo',$tipo) }}">
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="submit">Filtrar</button>
+                <button class="btn btn-outline-secondary" type="submit">Filtrar por F ou A</button>
             </div>
             </div>
         </form>
     </div>
 </div>
 
+<div>
+
+    <a href="{{ route('admin.trabalhadores.create') }}" class="btn btn-success" role="button" aria-pressed="true">Novo Trabalhador</a>
+
+</div>
+<p> </p>
+
     <table class="table">
         <thead>
             <tr>
                 <th></th>
                 <th>Nome</th>
-                <th>Tipo</th>
                 <th></th>
             </tr>
         </thead>

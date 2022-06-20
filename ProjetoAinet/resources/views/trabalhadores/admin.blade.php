@@ -1,5 +1,5 @@
 @extends('layout_admin')
-@section('title','Users' )
+@section('title','Trabalhadores' )
 @section('content')
 <div class="row mb-3">
 
@@ -8,7 +8,7 @@
             <div class="input-group">
             <input type="text" name="tipo" value="{{old('tipo',$tipo) }}">
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="submit">Filtrar</button>
+                <button class="btn btn-outline-secondary" type="submit">Filtrar por F ou A</button>
             </div>
             </div>
         </form>
@@ -20,7 +20,7 @@
             <tr>
                 <th></th>
                 <th>Nome</th>
-                <th>Tipo</th>
+
                 <th></th>
             </tr>
         </thead>
