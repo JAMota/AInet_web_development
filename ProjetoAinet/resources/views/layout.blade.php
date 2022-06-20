@@ -34,8 +34,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 </div>
                 <div class="account_desc">
                     <ul>
-                        <li><a href="{{ route('registo') }}">Registo</a></li>
+
+                        @auth
+                        @if (auth()->user()->tipo != 'C') <li><a href="{{ route('login') }}">Dashboard</a></li>
+                        @endif
+                        @else<li><a href="{{ route('registo') }}">Registo</a></li>
+
                         <li><a href="{{ route('login') }}">Login</a></li>
+                        @endauth
 
                         <li><a href="{{route('carrinho.index')}}">Carrinho</a></li>
                         @auth

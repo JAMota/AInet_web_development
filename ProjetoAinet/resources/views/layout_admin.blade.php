@@ -56,11 +56,24 @@
 
             <!-- Nav Item -->
             @can('viewAny', App\Models\Cliente::class)
-                <li class="nav-item {{ Route::currentRouteName() == 'admin.clientes' ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('admin.clientes') }}">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Clientes</span></a>
-                </li>
+                @if (auth()->user()->tipo == 'A')
+                    <li class="nav-item {{ Route::currentRouteName() == 'admin.clientes' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('admin.clientes') }}">
+                            <i class="fas fa-fw fa-table"></i>
+                            <span>Gestão de Clientes</span></a>
+                    </li>
+                @endif
+            @endcan
+
+            <!-- Nav Item -->
+            @can('viewAny', App\Models\Cliente::class)
+                @if (auth()->user()->tipo == 'A')
+                    <li class="nav-item {{ Route::currentRouteName() == 'admin.clientes' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('admin.clientes') }}">
+                            <i class="fas fa-fw fa-table"></i>
+                            <span>Gestão de Trabalhadores</span></a>
+                    </li>
+                @endif
             @endcan
 
             <!-- Nav Item -->
@@ -94,31 +107,52 @@
 
 
             <!-- Nav Item - Generos -->
+            @auth @if (auth()->user()->tipo == 'A')
             <li class="nav-item {{ Route::currentRouteName() == 'admin.generos' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.generos') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Gestao de Generos</span></a>
             </li>
 
+
             <!-- Divider -->
             <hr class="sidebar-divider">
+            @endif
+            @endauth
 
-            <!-- Nav Item - Generos -->
+            <!-- Nav Item - Salas -->
+            @auth @if (auth()->user()->tipo == 'A')
             <li class="nav-item {{ Route::currentRouteName() == 'admin.generos' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.generos') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Gestao de Salas</span></a>
             </li>
 
+
             <!-- Divider -->
             <hr class="sidebar-divider">
+            @endif @endauth
 
-            <!-- Nav Item - Generos -->
+            <!-- Nav Item - bilhetes -->
+            @auth @if (auth()->user()->tipo == 'A')
             <li class="nav-item {{ Route::currentRouteName() == 'admin.generos' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.generos') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Gestao de Bilhetes</span></a>
             </li>
+
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+            @endif @endauth
+            <!-- Nav Item - Salas -->
+            @auth @if (auth()->user()->tipo == 'A')
+            <li class="nav-item {{ Route::currentRouteName() == 'admin.generos' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.generos') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Gestao de Salas</span></a>
+            </li>
+            @endif @endauth
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -172,7 +206,8 @@
                                         Alterar Password
                                     </a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <a class="dropdown-item" href="#" data-toggle="modal"
+                                        data-target="#logoutModal">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Logout
                                     </a>

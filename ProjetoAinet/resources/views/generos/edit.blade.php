@@ -7,8 +7,13 @@
         @include('generos.partials.create-edit')
         <input type="hidden" name="genero_code" value="{{$genero->code}}">
         <div class="form-group text-right">
-                <button type="submit" class="btn btn-success" name="ok">Save</button>
-                <a href="{{route('admin.generos.edit', ['genero' => $genero]) }}" class="btn btn-secondary">Cancel</a>
+
+                <button type="submit" class="btn btn-success" href="{{route('admin.generos.edit', ['genero' => $genero]) }}">
+                    <a> Save</a>
+               </button>
+
+               </button>
+               <a href="{{route('admin.generos') }}" class="btn btn-secondary">Cancel</a>
         </div>
     </form>
 @endsection

@@ -25,27 +25,28 @@ use App\Http\Controllers\DashboardController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/', [FilmeController::class, 'index'])->name('home');
 Route::get('filmes/{filme}', [FilmeController::class, 'show'])->name('filmes.show');
 Route::get('sessoes/{sessao}', [SessaoController::class, 'show'])->name('sessoes.show');
 Route::get('carrinho', [CarrinhoController::class, 'index'])->name('carrinho.index');
 Route::post('carrinho/lugares/{sessao}/{lugar}', [CarrinhoController::class, 'store_bilhete'])->name('carrinho.store_bilhete');
 Route::delete('carrinho/lugares/{id}', [CarrinhoController::class, 'destroy_bilhete'])->name('carrinho.destroy_bilhete');
-Route::post('carrinho', [CarrinhoController::class, 'confirmar'])->name('carrinho.confirmar')->middleware(['auth','verified','isBloqueado','isCliente']);
+Route::post('carrinho', [CarrinhoController::class, 'confirmar'])->name('carrinho.confirmar')->middleware(['auth', 'verified', 'isBloqueado', 'isCliente']);
 Route::delete('carrinho', [CarrinhoController::class, 'destroy'])->name('carrinho.destroy');
 
-Route::middleware(['auth','verified','isBloqueado'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'verified', 'isBloqueado'])->prefix('admin')->name('admin.')->group(function () {
     // dashboard
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-                            //carrinhoController ainda nao existe
+    //carrinhoController ainda nao existe
     #Route::get('Checkout', 'carrinhoController' )->middleware('isCliente');
 
     //bloquear clientes
-    Route::patch('users/{user}/bloqueado',[UserController::class, 'bloquear'])->name('bloqueado.update');
+    Route::patch('users/{user}/bloqueado', [UserController::class, 'bloquear'])->name('bloqueado.update');
 
 
-        // admininstração de generos
+    // admininstração de generos
     Route::get('generos', [GeneroController::class, 'admin'])->name('generos')
         ->middleware('can:viewAny,App\Models\Genero');
     Route::get('generos/{genero}/edit', [GeneroController::class, 'edit'])->name('generos.edit')
@@ -59,7 +60,7 @@ Route::middleware(['auth','verified','isBloqueado'])->prefix('admin')->name('adm
     Route::delete('generos/{genero}', [GeneroController::class, 'destroy'])->name('generos.destroy')
         ->middleware('can:delete,genero');
 
-        // admininstração de salas
+    // admininstração de salas
     Route::get('salas', [SalaController::class, 'admin'])->name('salas')
         ->middleware('can:viewAny,App\Models\Sala');
     Route::get('salas/{sala}/edit', [SalaController::class, 'edit'])->name('salas.edit')
@@ -87,34 +88,48 @@ Route::middleware(['auth','verified','isBloqueado'])->prefix('admin')->name('adm
     Route::delete('filmes/{filme}', [FilmeController::class, 'destroy'])->name('filmes.destroy')
         ->middleware('can:delete,filme');
 
-                // admininstração de clientes
+    // admininstração de clientes
     Route::get('clientes', [ClienteController::class, 'admin'])->name('clientes')
-    ->middleware('can:viewAny,App\Models\Cliente');
-Route::get('clientes/{cliente}/edit', [ClienteController::class, 'edit'])->name('clientes.edit')
-    ->middleware('can:view,cliente');
-Route::get('clientes/create', [ClienteController::class, 'create'])->name('clientes.create')
-    ->middleware('can:create,App\Models\Cliente');
-Route::post('clientes', [ClienteController::class, 'store'])->name('clientes.store')
-    ->middleware('can:create,App\Models\Cliente');
-Route::put('clientes/{cliente}', [ClienteController::class, 'update'])->name('clientes.update')
-    ->middleware('can:update,cliente');
-Route::delete('clientes/{cliente}', [ClienteController::class, 'destroy'])->name('clientes.destroy')
-    ->middleware('can:delete,cliente');
+        ->middleware('can:viewAny,App\Models\Cliente');
+    Route::get('clientes/{cliente}/edit', [ClienteController::class, 'edit'])->name('clientes.edit')
+        ->middleware('can:view,cliente');
+    Route::get('clientes/create', [ClienteController::class, 'create'])->name('clientes.create')
+        ->middleware('can:create,App\Models\Cliente');
+    Route::post('clientes', [ClienteController::class, 'store'])->name('clientes.store')
+        ->middleware('can:create,App\Models\Cliente');
+    Route::put('clientes/{cliente}', [ClienteController::class, 'update'])->name('clientes.update')
+        ->middleware('can:update,cliente');
+    Route::delete('clientes/{cliente}', [ClienteController::class, 'destroy'])->name('clientes.destroy')
+        ->middleware('can:delete,cliente');
+
+    // admininstração de trabalhadores
+    Route::get('trabalhadores', [ClienteController::class, 'admin'])->name('clientes')
+        ->middleware('can:viewAny,App\Models\Cliente');
+    Route::get('clientes/{cliente}/edit', [ClienteController::class, 'edit'])->name('clientes.edit')
+        ->middleware('can:view,cliente');
+    Route::get('clientes/create', [ClienteController::class, 'create'])->name('clientes.create')
+        ->middleware('can:create,App\Models\Cliente');
+    Route::post('clientes', [ClienteController::class, 'store'])->name('clientes.store')
+        ->middleware('can:create,App\Models\Cliente');
+    Route::put('clientes/{cliente}', [ClienteController::class, 'update'])->name('clientes.update')
+        ->middleware('can:update,cliente');
+    Route::delete('clientes/{cliente}', [ClienteController::class, 'destroy'])->name('clientes.destroy')
+        ->middleware('can:delete,cliente');
 
     Route::delete('users/{user}/foto', [UserController::class, 'destroy_foto'])->name('users.foto.destroy')
-    ->middleware('can:update,cliente');
+        ->middleware('can:update,cliente');
 
 
     Route::post('recibos', [ReciboController::class, 'store'])->name('recibos.store')
-    ->middleware('isCliente');
+        ->middleware('isCliente');
 
     //administracao de passwords/Alterar password
-    Route::get('users/password',[UserController::class, 'edit_password'])->name('password.edit');
-    Route::patch('users/password',[UserController::class, 'update_password'])->name('password.update');
+    Route::get('users/password', [UserController::class, 'edit_password'])->name('password.edit');
+    Route::patch('users/password', [UserController::class, 'update_password'])->name('password.update');
 });
 
 //login
-Auth::routes(['verify'=>true]);
+Auth::routes(['verify' => true]);
 
 #register para todos os utilizadores nao autenticados
 //TODO tirar este butao se o utilizadar estiver logado

@@ -1,10 +1,3 @@
-@extends('layout_admin')
-@section('title', 'Novo Cliente')
-@section('content')
-    <form method="POST" action="{{ route('admin.alunos.store') }}" class="form-group" enctype="multipart/form-data">
-        @csrf
-        <? #@include('alunos.partials.create-edit')
-                           # aqui começam os campos que queremos preencher do formulario ?>
 
         <div class="form-group">
             <label for="inputNome">Nome</label>
@@ -14,6 +7,7 @@
                 <div class="small text-danger">{{ $message }}</div>
             @enderror
         </div>
+
         <div class="form-group">
             <label for="inputEmail">Email</label>
             <input type="email" class="form-control" name="email" id="inputEmail"
@@ -22,23 +16,31 @@
                 <div class="small text-danger">{{ $message }}</div>
             @enderror
         </div>
-        <div class="form-group">
-            <label for="inputGabinete">Password</label>
-            <input type="text" class="form-control" name="password" id="inputPassword">
-        </div>
+
         <div class="form-group">
             <label for="inputFoto">Upload da foto</label>
-            <input type="file" class="form-control" name="foto" id="inputFoto">
+            <input type="file" class="form-control" name="foto_url" id="inputFoto">
             @error('foto')
                 <div class="small text-danger">{{ $message }}</div>
             @enderror
         </div>
 
 
-        <? # aqui acabam os campos que queremos preencher do formulario ?>
-        <div class="form-group text-right">
-            <button type="submit" class="btn btn-success" name="ok">Save</button>
-            <a href="{{ route('admin.alunos.create') }}" class="btn btn-secondary">Cancel</a>
+        <div>
+        <label for="inputTipo">Tipo de Utilizador</label>
         </div>
-    </form>
-@endsection
+        <div class="form-check form-check-inline">
+
+            <input type="radio" class="form-check-input" id="inputAdmin" name="tipo" value="A"
+                {{ old('tipo', $user->tipo) == 'A' ? 'checked' : '' }}>
+            <label class="form-check-label" for="inputAdmin"> Admin </label>
+
+            <input type="radio" class="form-check-input ml-4" id="inputFuncionario" name="tipo" value="F"
+                {{ old('tipo', $user->tipo) == 'F' ? 'checked' : '' }}>
+            <label class="form-check-label" for="inputMBWay"> Funcionario </label>
+            @error('tipo')
+            <div class="small text-danger">{{ $message }}</div>
+        @enderror
+        </div>
+
+

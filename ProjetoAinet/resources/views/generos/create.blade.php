@@ -13,8 +13,14 @@
         </div>
         @include('generos.partials.create-edit')
         <div class="form-group text-right">
-                <button type="submit" class="btn btn-success" name="ok">Save</button>
-                <a href="{{route('admin.generos.create')}}" class="btn btn-secondary">Cancel</a>
+
+
+                <button type="submit" class="btn btn-success" href="{{route('admin.generos.create')}}">
+                    <a> Save</a>
+               </button>
+
+               </button>
+               <a href="{{route('admin.generos') }}" class="btn btn-secondary">Cancel</a>
         </div>
     </form>
 @endsection

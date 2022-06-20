@@ -30,7 +30,7 @@ class ClienteController extends Controller
         $clientes = $qry->paginate(10);
 
 
-        return view('cliente.admin', compact('clientes', 'pesq_name'));
+        return view('clientes.admin', compact('clientes', 'pesq_name'));
     }
 
     public function edit(Cliente $cliente)
