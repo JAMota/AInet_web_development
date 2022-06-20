@@ -103,17 +103,17 @@ Route::middleware(['auth', 'verified', 'isBloqueado'])->prefix('admin')->name('a
         ->middleware('can:delete,cliente');
 
     // admininstração de trabalhadores
-    Route::get('trabalhadores', [ClienteController::class, 'admin'])->name('clientes')
+    Route::get('trabalhadores', [ClienteController::class, 'admin'])->name('trabalhadores')
         ->middleware('can:viewAny,App\Models\Cliente');
-    Route::get('clientes/{cliente}/edit', [ClienteController::class, 'edit'])->name('clientes.edit')
+    Route::get('trabalhadores/{cliente}/edit', [ClienteController::class, 'edit'])->name('trabalhadores.edit')
         ->middleware('can:view,cliente');
-    Route::get('clientes/create', [ClienteController::class, 'create'])->name('clientes.create')
+    Route::get('trabalhadores/create', [ClienteController::class, 'create'])->name('trabalhadores.create')
         ->middleware('can:create,App\Models\Cliente');
-    Route::post('clientes', [ClienteController::class, 'store'])->name('clientes.store')
+    Route::post('trabalhadores', [ClienteController::class, 'store'])->name('trabalhadores.store')
         ->middleware('can:create,App\Models\Cliente');
-    Route::put('clientes/{cliente}', [ClienteController::class, 'update'])->name('clientes.update')
+    Route::put('trabalhadores/{cliente}', [ClienteController::class, 'update'])->name('trabalhadores.update')
         ->middleware('can:update,cliente');
-    Route::delete('clientes/{cliente}', [ClienteController::class, 'destroy'])->name('clientes.destroy')
+    Route::delete('trabalhadores/{cliente}', [ClienteController::class, 'destroy'])->name('trabalhadores.destroy')
         ->middleware('can:delete,cliente');
 
     Route::delete('users/{user}/foto', [UserController::class, 'destroy_foto'])->name('users.foto.destroy')

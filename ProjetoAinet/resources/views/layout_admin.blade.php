@@ -66,15 +66,15 @@
             @endcan
 
             <!-- Nav Item -->
-            @can('viewAny', App\Models\Cliente::class)
-                @if (auth()->user()->tipo == 'A')
-                    <li class="nav-item {{ Route::currentRouteName() == 'admin.clientes' ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('admin.clientes') }}">
+
+                @auth @if (auth()->user()->tipo == 'A')
+                    <li class="nav-item {{ Route::currentRouteName() == 'admin.trabalhadores' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('admin.trabalhadores') }}">
                             <i class="fas fa-fw fa-table"></i>
                             <span>Gestão de Trabalhadores</span></a>
                     </li>
-                @endif
-            @endcan
+                @endif @endauth
+
 
             <!-- Nav Item -->
             @can('viewAny', App\Models\User::class)
