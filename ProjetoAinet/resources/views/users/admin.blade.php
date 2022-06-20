@@ -54,7 +54,7 @@
 
                         @endcan
                         @can('view', $user)
-                        <a href="{{ route('admin.trabalhadoress.edit', ['user' => $user]) }}"
+                        <a href="{{ route('admin.trabalhadores.edit', ['user' => $user]) }}"
                             class="btn btn-primary btn-sm" role="button" aria-pressed="true"><i
                                 class="fa  @cannot('update',$user) fa-eye @else fa-pen @endcan"></i></a>
                         @else

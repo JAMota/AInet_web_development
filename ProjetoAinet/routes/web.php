@@ -102,20 +102,28 @@ Route::middleware(['auth', 'verified', 'isBloqueado'])->prefix('admin')->name('a
     Route::delete('clientes/{cliente}', [ClienteController::class, 'destroy'])->name('clientes.destroy')
         ->middleware('can:delete,cliente');
 
+
     // admininstração de trabalhadores
-    Route::get('trabalhadores', [UserController::class, 'admin'])->name('trabalhadores')
-        //->middleware('can:viewAny,App\Models\User')
-        ;
-    Route::get('trabalhadores/{user}/edit', [UserController::class, 'edit'])->name('trabalhadores.edit')
-        ->middleware('can:view,cliente');
-    Route::get('trabalhadores/create', [UserController::class, 'create'])->name('trabalhadores.create')
-        ->middleware('can:create,App\Models\User');
-    Route::post('trabalhadores', [UserController::class, 'store'])->name('trabalhadores.store')
-        ->middleware('can:create,App\Models\User');
-    Route::put('trabalhadores/{user}', [UserController::class, 'update'])->name('trabalhadores.update')
-        ->middleware('can:update,cliente');
-    Route::delete('trabalhadores/{user}', [UserController::class, 'destroy'])->name('trabalhadores.destroy')
-        ->middleware('can:delete,cliente');
+Route::get('trabalhadores', [UserController::class, 'admin'])->name('trabalhadores')
+//->middleware('can:viewAny,App\Models\User')
+;
+Route::get('trabalhadores/{user}/edit', [UserController::class, 'edit'])->name('trabalhadores.edit')
+->middleware('can:view,user')
+;
+Route::get('trabalhadores/create', [UserController::class, 'create'])->name('trabalhadores.create')
+->middleware('can:create,App\Models\User')
+;
+Route::post('trabalhadores', [UserController::class, 'store'])->name('trabalhadores.store')
+->middleware('can:create,App\Models\User')
+;
+Route::put('trabalhadores/{user}', [UserController::class, 'update'])->name('trabalhadores.update')
+->middleware('can:update,user')
+;
+Route::delete('trabalhadores/{user}', [UserController::class, 'destroy'])->name('trabalhadores.destroy')
+->middleware('can:delete,user')
+;
+
+
 
     Route::delete('users/{user}/foto', [UserController::class, 'destroy_foto'])->name('users.foto.destroy')
         ->middleware('can:update,cliente');
@@ -141,3 +149,6 @@ Route::post('/clientes', [ClienteController::class, 'store'])->name('clientes');
 //enviar mail de comfirmação e email com o pdf com receibos
 Route::get('send-email', [MailController::class, 'index']);
 #Route::get('send-email-pdf', [SendEmailController::class, 'index']);
+
+
+

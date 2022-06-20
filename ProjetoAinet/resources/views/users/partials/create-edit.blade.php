@@ -2,7 +2,7 @@
         <div class="form-group">
             <label for="inputNome">Nome</label>
             <input type="text" class="form-control" name="name" id="inputNome"
-                value="{{ old('name', $cliente->user->name) }}">
+                value="{{ old('name', $user->name) }}">
             @error('name')
                 <div class="small text-danger">{{ $message }}</div>
             @enderror
@@ -11,7 +11,7 @@
         <div class="form-group">
             <label for="inputEmail">Email</label>
             <input type="email" class="form-control" name="email" id="inputEmail"
-                value="{{ old('email', $cliente->user->email) }}">
+                value="{{ old('email', $user->email) }}">
             @error('email')
                 <div class="small text-danger">{{ $message }}</div>
             @enderror

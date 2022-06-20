@@ -1,9 +1,9 @@
 @extends('layout_admin')
 @section('title', 'Novo Trabalhador')
 @section('content')
-    <form method="POST" action="{{ route('clientes') }}" class="form-group" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('admin.trabalhadores.store') }}" class="form-group" enctype="multipart/form-data">
         @csrf
-        @include('clientes.partials.create-edit')
+        @include('users.partials.create-edit')
 
         <div class="form-group">
             <label for="inputGabinete">Password</label>
@@ -20,12 +20,12 @@
         </div>
 
         <div class="form-group text-right">
-            <button type="submit" class="btn btn-primary" href="{{ route('clientes') }}">
+            <button type="submit" class="btn btn-primary" href="{{ route('admin.trabalhadores.store') }}">
                  <a> Registar</a>
             </button>
 
             </button>
-            <a href="{{ route('clientes') }}" class="btn btn-secondary">Cancel</a>
+            <a href="{{ route('admin.trabalhadores') }}" class="btn btn-secondary">Cancel</a>
         </div>
 
     </form>

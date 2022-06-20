@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class isAdmin
 {
@@ -16,6 +17,9 @@ class isAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+        if(auth()->user()->tipo=='A'){
+            return $next($request);
+        }
+        throw new AccessDeniedHttpException("O utilizador não se encontra registado como Admin");
     }
 }
