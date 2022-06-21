@@ -45,21 +45,6 @@ class SalaController extends Controller
     }
     public function destroy(Sala $sala)
     {
-        if (count($sala->disciplinas)){
-            return redirect()->route('admin.salas')
-            ->with('alert-msg', 'Não foi possível apagar o Sala "' . $sala->nome . '", porque este sala já está associado a disciplinas!')
-            ->with('alert-type', 'danger');
-        }
-        if (count($sala->alunos)){
-            return redirect()->route('admin.salas')
-            ->with('alert-msg', 'Não foi possível apagar o Sala "' . $sala->nome . '", porque este sala já está associado a alunos!')
-            ->with('alert-type', 'danger');
-        }
-        if (count($sala->candidaturas)){
-            return redirect()->route('admin.salas')
-            ->with('alert-msg', 'Não foi possível apagar o Sala "' . $sala->nome . '", porque este sala já está associado a candidaturas!')
-            ->with('alert-type', 'danger');
-        }
         $oldName=$sala->nome;
         $sala->delete();
         return redirect()->route('admin.salas')

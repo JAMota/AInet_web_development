@@ -122,8 +122,8 @@
 
             <!-- Nav Item - Salas -->
             @auth @if (auth()->user()->tipo == 'A')
-            <li class="nav-item {{ Route::currentRouteName() == 'admin.generos' ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('admin.generos') }}">
+            <li class="nav-item {{ Route::currentRouteName() == 'admin.salas' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.salas') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Gestao de Salas</span></a>
             </li>
@@ -133,12 +133,12 @@
             <hr class="sidebar-divider">
             @endif @endauth
 
-            <!-- Nav Item - bilhetes -->
+            <!-- Nav Item - Filmes -->
             @auth @if (auth()->user()->tipo == 'A')
-            <li class="nav-item {{ Route::currentRouteName() == 'admin.generos' ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('admin.generos') }}">
+            <li class="nav-item {{ Route::currentRouteName() == 'admin.filmes' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.filmes') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Gestao de Bilhetes</span></a>
+                    <span>Gestao de Filmes</span></a>
             </li>
 
 

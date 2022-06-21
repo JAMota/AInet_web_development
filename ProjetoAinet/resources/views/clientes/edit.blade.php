@@ -22,7 +22,15 @@
             @can('update', $cliente)
                  <button type="submit" class="btn btn-success" name="ok">Save</button>
                 <a href="{{ route('admin.clientes.edit', ['cliente' => $cliente]) }}" class="btn btn-secondary">Cancel</a>
+
+                <button type="submit" class="btn btn-primary" href="{{ route('admin.clientes.edit', ['cliente' => $cliente]) }}">
+                    <a> Save</a>
+               </button>
+
+               </button>
+               <a href="{{ route('home') }}" class="btn btn-secondary">Cancel</a>
             @endcan
+
     </div>
     </form>
     <form id="form_delete_photo" action="{{ route('admin.users.foto.destroy', ['user' => $cliente->user]) }}" method="POST">

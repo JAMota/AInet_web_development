@@ -7,8 +7,13 @@
         @include('salas.partials.create-edit')
         <input type="hidden" name="sala_abreviatura" value="{{$sala->abreviatura}}">
         <div class="form-group text-right">
-                <button type="submit" class="btn btn-success" name="ok">Save</button>
-                <a href="{{route('admin.salas.edit', ['sala' => $sala]) }}" class="btn btn-secondary">Cancel</a>
+
+                <button type="submit" class="btn btn-primary" href="{{route('admin.salas.edit', ['sala' => $sala]) }}">
+                    <a> Save</a>
+               </button>
+
+               </button>
+               <a href="{{ route('admin.salas') }}" class="btn btn-secondary">Cancel</a>
         </div>
     </form>
 @endsection
