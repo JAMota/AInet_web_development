@@ -26,6 +26,26 @@ class FilmeController extends Controller
         return view('filmes.admin', compact('filmes','generos','genero'));
 
     }
+
+    public function admin(Request $request)
+    {
+        $pesq_titulo = $request->pesq_titulo ?? '';
+        // Use Debugbar to compare both solutions
+        // Comment one of the following 2 lines
+
+         $qry = Filme::with('');
+        //$qry =  Cliente::query();
+
+        if ($pesq_titulo) {
+            $qry->whereHas('', function ($query) use ($pesq_titulo){
+                $query->where('name','like', "%$pesq_titulo%");
+            });
+        }
+        $clientes = $qry->paginate(10);
+
+
+        return view('layout', compact('filmes', 'pesq_titulo'));
+    }
     public function index(Request $request)
     {
         $data=Carbon::now()->subMinutes(5)->format('Y-m-d');
@@ -82,8 +102,7 @@ class FilmeController extends Controller
 
         $code = $request->code;
 
-        $id=Filme::where('genero_code','LIKE', "%$code%")->pluck('id'); //nao conseguimos tornar esta pesquisa dinamica
-        //$filmes_id=Sessao::pluck('filme_id');
+        $id=Filme::where('genero_code','LIKE', "%{$code}%")->pluck('id'); //nao conseguimos tornar esta pesquisa dinamica
         $filmes = $filmes ->whereIn('id',$id)->get();
         return view(
             'filmes.generos',
@@ -145,4 +164,17 @@ class FilmeController extends Controller
                 ->with('alert-type', 'success');
 
     }
+
+    /*public function search(Request $request){
+        // Get the search value from the request
+        $search = $request->input('search');
+
+        // Search in the title and body columns from the posts table
+        $posts = Filme::query()
+            ->where('titulo', 'LIKE', "%{$search}%")
+            ->get();
+
+        // Return the search view with the resluts compacted
+        return view('layout', compact('posts'));
+    }*/
 }

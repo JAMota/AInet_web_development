@@ -1,8 +1,7 @@
-@extends('layout_admin')
+@extends('layout')
 @section('title','Filmes' )
 @section('content')
 <div class="row mb-3">
-
     <div class="col-9">
         <form method="GET" action="{{route('admin.filmes')}}" class="form-group">
             <div class="input-group">

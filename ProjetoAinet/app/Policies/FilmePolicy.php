@@ -20,7 +20,7 @@ class FilmePolicy
      * @return \Illuminate\Auth\Access\Response|bool
      */
 
-    public function before($user, $ability)
+    public function before(User $user, $ability)
     {
         if ($user->tipo == 'A') {
             return true;

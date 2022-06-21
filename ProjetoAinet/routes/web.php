@@ -28,6 +28,9 @@ use App\Http\Controllers\DashboardController;
 
 Route::get('/', [FilmeController::class, 'index'])->name('home');
 Route::get('/f/{genero}', [FilmeController::class, 'index_all'])->name('filmes.index_all');
+
+//Route::get('/index', [FilmeController::class, 'search'])->name('search');
+
 Route::get('filmes/{filme}', [FilmeController::class, 'show'])->name('filmes.show');
 Route::get('sessoes/{sessao}', [SessaoController::class, 'show'])->name('sessoes.show');
 
@@ -81,6 +84,8 @@ Route::middleware(['auth', 'verified', 'isBloqueado'])->prefix('admin')->name('a
     // filmes
     Route::get('filmes', [FilmeController::class, 'admin_index'])->name('filmes')
         ->middleware('can:viewAny,App\Models\Filme');
+    Route::get('filmes', [FilmeController::class, 'admin'])->name('filmes');
+
     Route::get('filmes/{filme}/edit', [FilmeController::class, 'edit'])->name('filmes.edit')
         ->middleware('can:view,filme');
     Route::get('filmes/create', [FilmeController::class, 'create'])->name('filmes.create')

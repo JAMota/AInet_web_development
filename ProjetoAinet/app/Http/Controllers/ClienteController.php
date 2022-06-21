@@ -16,6 +16,7 @@ class ClienteController extends Controller
     {
         $pesq_name = $request->pesq_name ?? '';
 
+
         // Use Debugbar to compare both solutions
         // Comment one of the following 2 lines
 
@@ -28,7 +29,6 @@ class ClienteController extends Controller
             });
         }
         $clientes = $qry->paginate(10);
-
 
         return view('clientes.admin', compact('clientes', 'pesq_name'));
     }

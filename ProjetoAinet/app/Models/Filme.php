@@ -6,6 +6,7 @@ use Facade\FlareClient\Middleware\AnonymizeIp;
 use Facade\Ignition\Tabs\Tab;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class Filme extends Model
 {
@@ -24,7 +25,7 @@ class Filme extends Model
 
     public function sessoes(){
         return $this->hasMany(Sessao::class,'filme_id','id');
-        /*return $this->hasMany(Sessao::class,'sessao_id','id'); penso que isto nao é preciso*/ 
+        /*return $this->hasMany(Sessao::class,'sessao_id','id'); penso que isto nao é preciso*/
     }
     public function genero(){
         return $this->belongsTo(Genero::class,'genero_code','code')->withTrashed();

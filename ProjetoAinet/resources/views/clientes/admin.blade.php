@@ -2,7 +2,6 @@
 @section('title','Clientes' )
 @section('content')
 <div class="row mb-3">
-
     <div class="col-9">
         <form method="GET" action="{{route('admin.clientes')}}" class="form-group">
             <div class="input-group">
