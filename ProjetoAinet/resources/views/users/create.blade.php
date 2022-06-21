@@ -1,7 +1,7 @@
 @extends('layout_admin')
 @section('title', 'Novo Trabalhador')
 @section('content')
-    <form method="POST" action="{{ route('admin.trabalhadores.store') }}" class="form-group" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('admin.users.store') }}" class="form-group" enctype="multipart/form-data">
         @csrf
         @include('users.partials.create-edit')
 
@@ -20,12 +20,12 @@
         </div>
 
         <div class="form-group text-right">
-            <button type="submit" class="btn btn-primary" href="{{ route('admin.trabalhadores.store') }}">
+            <button type="submit" class="btn btn-primary" href="{{ route('admin.users.store') }}">
                  <a> Registar</a>
             </button>
 
             </button>
-            <a href="{{ route('admin.trabalhadores') }}" class="btn btn-secondary">Cancel</a>
+            <a href="{{ route('admin.users') }}" class="btn btn-secondary">Cancel</a>
         </div>
 
     </form>

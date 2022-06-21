@@ -29,11 +29,14 @@ use App\Http\Controllers\DashboardController;
 Route::get('/', [FilmeController::class, 'index'])->name('home');
 Route::get('filmes/{filme}', [FilmeController::class, 'show'])->name('filmes.show');
 Route::get('sessoes/{sessao}', [SessaoController::class, 'show'])->name('sessoes.show');
+
 Route::get('carrinho', [CarrinhoController::class, 'index'])->name('carrinho.index');
 Route::post('carrinho/lugares/{sessao}/{lugar}', [CarrinhoController::class, 'store_bilhete'])->name('carrinho.store_bilhete');
 Route::delete('carrinho/lugares/{id}', [CarrinhoController::class, 'destroy_bilhete'])->name('carrinho.destroy_bilhete');
 Route::post('carrinho', [CarrinhoController::class, 'confirmar'])->name('carrinho.confirmar')->middleware(['auth', 'verified', 'isBloqueado', 'isCliente']);
 Route::delete('carrinho', [CarrinhoController::class, 'destroy'])->name('carrinho.destroy');
+
+Route::get('users', [UserController::class, 'admin'])->name('users')->middleware('can:viewAny,App\Models\Cliente');
 
 Route::middleware(['auth', 'verified', 'isBloqueado'])->prefix('admin')->name('admin.')->group(function () {
     // dashboard
@@ -104,24 +107,18 @@ Route::middleware(['auth', 'verified', 'isBloqueado'])->prefix('admin')->name('a
 
 
     // admininstração de trabalhadores
-Route::get('trabalhadores', [UserController::class, 'admin'])->name('trabalhadores')
-//->middleware('can:viewAny,App\Models\User')
-;
-Route::get('trabalhadores/{user}/edit', [UserController::class, 'edit'])->name('trabalhadores.edit')
-->middleware('can:view,user')
-;
-Route::get('trabalhadores/create', [UserController::class, 'create'])->name('trabalhadores.create')
-->middleware('can:create,App\Models\User')
-;
-Route::post('trabalhadores', [UserController::class, 'store'])->name('trabalhadores.store')
-->middleware('can:create,App\Models\User')
-;
-Route::put('trabalhadores/{user}', [UserController::class, 'update'])->name('trabalhadores.update')
-->middleware('can:update,user')
-;
-Route::delete('trabalhadores/{user}', [UserController::class, 'destroy'])->name('trabalhadores.destroy')
-->middleware('can:delete,user')
-;
+    Route::get('users', [UserController::class, 'admin'])->name('users')
+        ->middleware('can:viewAny,App\Models\Cliente');
+    Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit')
+        ->middleware('can:view,isAdmin');
+    Route::get('users/create,isAdmin', [UserController::class, 'create'])->name('users.create')
+        ->middleware('can:create');
+    Route::post('users', [UserController::class, 'store'])->name('users.store')
+    ->middleware('can:create,isAdmin');
+    Route::put('users/{user}', [UserController::class, 'update'])->name('users.update')
+    ->middleware('can:update,isAdmin');
+    Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy')
+    ->middleware('can:delete,isAdmin');
 
 
 
@@ -149,6 +146,5 @@ Route::post('/clientes', [ClienteController::class, 'store'])->name('clientes');
 //enviar mail de comfirmação e email com o pdf com receibos
 Route::get('send-email', [MailController::class, 'index']);
 #Route::get('send-email-pdf', [SendEmailController::class, 'index']);
-
 
 

@@ -1,31 +1,31 @@
 @extends('layout_admin')
-@section('title', 'Alterar Cliente')
+@section('title', 'Alterar User')
 @section('content')
-    <form method="POST" action="{{ route('admin.clientes.update', ['cliente' => $cliente]) }}" class="form-group"
+    <form method="POST" action="{{ route('admin.users.update', ['user' => $user]) }}" class="form-group"
         enctype="multipart/form-data">
         @csrf
         @method('PUT')
-        <input type="hidden" name="user_id" value="{{ $cliente->user_id }}">
-        @include('clientes.partials.create-edit')
-        @isset($cliente->user->foto_url)
+        <input type="hidden" name="user_id" value="{{ $user->user_id }}">
+        @include('users.partials.create-edit')
+        @isset($user->foto_url)
             <div class="form-group">
-                <img src="{{ $cliente->user->foto_url ? asset('storage/fotos/' . $cliente->user->foto_url) : asset('img/default_img.png') }}"
-                    alt="Foto do cliente" class="img-profile" style="max-width:100%">
+                <img src="{{ $user->foto_url ? asset('storage/fotos/' . $user->foto_url) : asset('img/default_img.png') }}"
+                    alt="Foto do user" class="img-profile" style="max-width:100%">
             </div>
         @endisset
         <div class="form-group text-right">
-            @isset($cliente->user->foto_url)
-                @can('update', $cliente)
+            @isset($user->foto_url)
+                @can('update', $user)
                     <button type="submit" class="btn btn-danger" name="deletefoto" form="form_delete_photo">Apagar Foto</button>
                 @endcan
             @endisset
-            @can('update', $cliente)
+            @can('update', $user)
                  <button type="submit" class="btn btn-success" name="ok">Save</button>
-                <a href="{{ route('admin.clientes.edit', ['cliente' => $cliente]) }}" class="btn btn-secondary">Cancel</a>
+                <a href="{{ route('admin.users.edit', ['user' => $user]) }}" class="btn btn-secondary">Cancel</a>
             @endcan
     </div>
     </form>
-    <form id="form_delete_photo" action="{{ route('admin.users.foto.destroy', ['user' => $cliente->user]) }}" method="POST">
+    <form id="form_delete_photo" action="{{ route('admin.users.foto.destroy', ['user' => $user]) }}" method="POST">
         @csrf
         @method('DELETE')
     </form>

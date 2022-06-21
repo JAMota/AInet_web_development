@@ -4,7 +4,7 @@
 <div class="row mb-3">
 
     <div class="col-9">
-        <form method="GET" action="{{route('admin.trabalhadores')}}" class="form-group">
+        <form method="GET" action="{{route('admin.users')}}" class="form-group">
             <div class="input-group">
             <input type="text" name="tipo" value="{{old('tipo',$tipo) }}">
             <div class="input-group-append">
@@ -17,7 +17,7 @@
 
 <div>
 
-    <a href="{{ route('admin.trabalhadores.create') }}" class="btn btn-success" role="button" aria-pressed="true">Novo Trabalhador</a>
+    <a href="{{ route('admin.users.create') }}" class="btn btn-success" role="button" aria-pressed="true">Novo Trabalhador</a>
 
 </div>
 <p> </p>
@@ -54,7 +54,7 @@
 
                         @endcan
                         @can('view', $user)
-                        <a href="{{ route('admin.trabalhadores.edit', ['user' => $user]) }}"
+                        <a href="{{ route('admin.users.edit', ['user' => $user]) }}"
                             class="btn btn-primary btn-sm" role="button" aria-pressed="true"><i
                                 class="fa  @cannot('update',$user) fa-eye @else fa-pen @endcan"></i></a>
                         @else
@@ -62,7 +62,7 @@
                             class="fa @cannot('update',$user) fa-eye @else fa-pen @endcan"></i></span>
                         @endcan
                         @can('delete', $user)
-                        <form action="{{route('admin.trabalhadores.destroy', ['user' => $user])}}" method="POST" class="d-inline"
+                        <form action="{{route('admin.users.destroy', ['user' => $user])}}" method="POST" class="d-inline"
                             onsubmit="return confirm('Tem a certeza que deseja apagar o registo');">
                             @csrf
                             @method("DELETE")

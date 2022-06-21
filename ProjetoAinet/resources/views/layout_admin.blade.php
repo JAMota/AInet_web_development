@@ -68,8 +68,8 @@
             <!-- Nav Item -->
 
                 @auth @if (auth()->user()->tipo == 'A')
-                    <li class="nav-item {{ Route::currentRouteName() == 'admin.trabalhadores' ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('admin.trabalhadores') }}">
+                    <li class="nav-item {{ Route::currentRouteName() == 'admin.users' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('admin.users') }}">
                             <i class="fas fa-fw fa-table"></i>
                             <span>Gestão de Trabalhadores</span></a>
                     </li>

@@ -17,7 +17,7 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user ->tipo =='A';
     }
 
     /**
@@ -29,7 +29,7 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
-        //
+        return ($user ->tipo =='A' && $model->tipo != 'C') || ($user ->tipo =='C' && $user->id == $model->id);
     }
 
     /**
