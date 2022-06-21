@@ -7,6 +7,7 @@
         <thead>
             <tr>
                 <th>Receibo</th>
+                <th>Data</th>
                 <th>Preço</th>
                 <th></th>
             </tr>
@@ -18,6 +19,7 @@
 
                     @if ($recibo->cliente_id == auth()->user()->id)
                         <td>{{ $recibo->id }}</td>
+                        <td>{{ $recibo->data }}</td>
                         <td>{{ $recibo->preco_total_com_iva }}</td>
                         <td nowrap>
                     @endif
