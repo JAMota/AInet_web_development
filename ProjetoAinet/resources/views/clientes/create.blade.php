@@ -25,7 +25,7 @@
             </button>
 
             </button>
-            <a href="{{ route('clientes') }}" class="btn btn-secondary">Cancel</a>
+            <a href="{{ route('home') }}" class="btn btn-secondary">Cancel</a>
         </div>
 
     </form>
