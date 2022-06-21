@@ -44,6 +44,15 @@
       @enderror
   </div>
 
+  <div class="form-group">
+    <label for="inputFoto">Upload do cartaz</label>
+    <input type="file" class="form-control" name="cartaz_url" id="inputCartazUrl" >
+    @error('cartaz_url')
+        <div class="small text-danger">{{ $message }}</div>
+    @enderror
+</div>
+
+
    <!-- Falta trailer_url, cartaz_url -->
 
 

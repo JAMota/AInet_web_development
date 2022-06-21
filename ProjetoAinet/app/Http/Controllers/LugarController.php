@@ -50,7 +50,7 @@ class LugarController extends Controller
 
     public function destroy(Lugar $lugar)
     {
-        if(count($lugar->sessoes)){
+        if(!$lugar->sala->trashed()){
             return redirect()->route('admin.lugares')
                     ->with('alert-msg', 'Não foi possível apagar
                     o Lugar "' . $lugar->id . '", porque este lugar está associado a salas!')

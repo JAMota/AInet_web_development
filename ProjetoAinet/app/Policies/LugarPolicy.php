@@ -16,9 +16,17 @@ class LugarPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
+
+    public function before($user, $ability)
+    {
+        if ($user->tipo == 'A') {
+            return true;
+        }
+    }
     public function viewAny(User $user)
     {
-        //
+        //verificar se o user é administrador
+
     }
 
     /**
@@ -30,7 +38,7 @@ class LugarPolicy
      */
     public function view(User $user, Lugar $lugar)
     {
-        //
+
     }
 
     /**
@@ -41,7 +49,7 @@ class LugarPolicy
      */
     public function create(User $user)
     {
-        //
+
     }
 
     /**
@@ -53,7 +61,7 @@ class LugarPolicy
      */
     public function update(User $user, Lugar $lugar)
     {
-        //
+
     }
 
     /**
@@ -65,7 +73,7 @@ class LugarPolicy
      */
     public function delete(User $user, Lugar $lugar)
     {
-        //
+
     }
 
     /**

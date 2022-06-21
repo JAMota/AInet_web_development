@@ -6,12 +6,14 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\SalaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FilmeController;
+use App\Http\Controllers\LugarController;
 use App\Http\Controllers\GeneroController;
 use App\Http\Controllers\ReciboController;
 use App\Http\Controllers\SessaoController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ConfiguracaoController;
 
 
 
@@ -97,6 +99,20 @@ Route::middleware(['auth', 'verified', 'isBloqueado'])->prefix('admin')->name('a
     Route::delete('filmes/{filme}', [FilmeController::class, 'destroy'])->name('filmes.destroy')
         ->middleware('can:delete,filme');
 
+            // lugares
+    Route::get('lugares', [LugarController::class, 'admin'])->name('lugares')
+    ->middleware('can:viewAny,App\Models\Lugar');
+Route::get('lugares/{lugar}/edit', [LugarController::class, 'edit'])->name('lugares.edit')
+    ->middleware('can:view,lugar');
+Route::get('lugares/create', [LugarController::class, 'create'])->name('lugares.create')
+    ->middleware('can:create,App\Models\Lugar');
+Route::post('lugares', [LugarController::class, 'store'])->name('lugares.store')
+    ->middleware('can:create,App\Models\Lugar');
+Route::put('lugares/{lugar}', [LugarController::class, 'update'])->name('lugares.update')
+    ->middleware('can:update,lugar');
+Route::delete('lugares/{lugar}', [LugarController::class, 'destroy'])->name('lugares.destroy')
+    ->middleware('can:delete,lugar');
+
     // admininstração de clientes
     Route::get('clientes', [ClienteController::class, 'admin'])->name('clientes')
         ->middleware('can:viewAny,App\Models\Cliente');
@@ -117,7 +133,7 @@ Route::middleware(['auth', 'verified', 'isBloqueado'])->prefix('admin')->name('a
         ->middleware('can:viewAny,App\Models\Cliente');
     Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit')
         ->middleware('can:view,isAdmin');
-    Route::get('users/create,isAdmin', [UserController::class, 'create'])->name('users.create')
+    Route::get('users/create', [UserController::class, 'create'])->name('users.create')
         ->middleware('can:create');
     Route::post('users', [UserController::class, 'store'])->name('users.store')
     ->middleware('can:create,isAdmin');
@@ -126,6 +142,11 @@ Route::middleware(['auth', 'verified', 'isBloqueado'])->prefix('admin')->name('a
     Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy')
     ->middleware('can:delete,isAdmin');
 
+
+    Route::get('configuracao', [ConfiguracaoController::class, 'edit'])->name('configuracao.edit')
+        ->middleware('can:edit');
+    Route::post('precos', [ConfiguracaoController::class, 'update'])->name('configuracao.store')
+    ->middleware('can:create,isAdmin');
 
 
     Route::delete('users/{user}/foto', [UserController::class, 'destroy_foto'])->name('users.foto.destroy')

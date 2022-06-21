@@ -28,7 +28,7 @@
         <div class="form-group">
             <label for="inputNif">Nif</label>
             <input id="nif" type="text" class="form-control @error('nif') is-invalid @enderror" name="nif"
-                value="{{ old('nif') }}" required autocomplete="nif" autofocus>
+                value="{{ old('nif', $cliente->nif) }}" required autocomplete="nif" autofocus>
                 @error('nif')
                 <div class="small text-danger">{{ $message }}</div>
             @enderror
@@ -56,7 +56,7 @@
         <div class="form-group">
             <label for="inputRefPagamento">Referencias de Pagamento</label>
             <input id="ref_pagamento" type="text" class="form-control @error('ref_pagamento') is-invalid @enderror"
-                name="ref_pagamento" value="{{ old('ref_pagamento') }}" required autocomplete="ref_pagamento" autofocus>
+                name="ref_pagamento" value="{{ old('ref_pagamento', $cliente->ref_pagamento) }}" required autocomplete="ref_pagamento" autofocus>
                 @error('ref_pagamento')
                 <div class="small text-danger">{{ $message }}</div>
             @enderror

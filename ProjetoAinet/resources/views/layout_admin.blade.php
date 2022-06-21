@@ -147,8 +147,8 @@
             @endif @endauth
             <!-- Nav Item - Salas -->
             @auth @if (auth()->user()->tipo == 'A')
-            <li class="nav-item {{ Route::currentRouteName() == 'admin.generos' ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('admin.generos') }}">
+            <li class="nav-item {{ Route::currentRouteName() == 'admin.lugares' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.lugares') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Gestao de Lugares</span></a>
             </li>
@@ -156,6 +156,17 @@
 
             <!-- Divider -->
             <hr class="sidebar-divider">
+
+            @endif @endauth
+            <!-- Nav Item - Preços -->
+            @auth @if (auth()->user()->tipo == 'F')
+            <li class="nav-item {{ Route::currentRouteName() == 'admin.configuracao' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.configuracao') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Gestao de Preço</span></a>
+            </li>
+            @endif @endauth
+
         </ul>
 
 

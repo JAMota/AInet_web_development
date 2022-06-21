@@ -27,7 +27,7 @@ class FilmePost extends FormRequest
             'titulo'=>          'required|string|max:255',
             'genero_code'=>     'exists:generos,code|string|max:20',
             'ano'=>             'required|integer',
-            'cartaz_url'=>      'string|max:255',
+            'cartaz_url'=>      'nullable|mimes:png,jpg|max:8192',
             'sumario'=>         'required|string',
             'trailer_url'=>     'string|max:255',
         ];

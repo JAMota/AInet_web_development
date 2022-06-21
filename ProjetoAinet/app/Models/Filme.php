@@ -20,7 +20,7 @@ class Filme extends Model
         'sumario',
         'genero_code',
         'trailer_url',
-        'cartaz_url', //nao é necessário - nunca é preciso porque é a foto
+        //'cartaz_url', //nao é necessário - nunca é preciso porque é a foto
     ];
 
     public function sessoes(){

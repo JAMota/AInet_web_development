@@ -20,8 +20,6 @@
                 @endcan
             @endisset
             @can('update', $cliente)
-                 <button type="submit" class="btn btn-success" name="ok">Save</button>
-                <a href="{{ route('admin.clientes.edit', ['cliente' => $cliente]) }}" class="btn btn-secondary">Cancel</a>
 
                 <button type="submit" class="btn btn-primary" href="{{ route('admin.clientes.edit', ['cliente' => $cliente]) }}">
                     <a> Save</a>

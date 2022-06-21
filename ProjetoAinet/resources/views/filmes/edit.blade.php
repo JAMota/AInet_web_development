@@ -7,8 +7,13 @@
         @method('PUT')
         @include('filmes.partials.create-edit')
         <div class="form-group text-right" enctype="multipart/form-data">
-            <button type="submit" class="btn btn-success" name="ok">Save</button>
-            <a href="{{route('admin.filmes.edit',['filme' => $filme])}}" class="btn btn-secondary">Cancel</a>
+
+            <button type="submit" class="btn btn-primary" href="{{route('admin.filmes.edit',['filme' => $filme])}}">
+                <a> Save</a>
+           </button>
+
+           </button>
+           <a href="{{ route('admin.filmes') }}" class="btn btn-secondary">Cancel</a>
         </div>
     </form>
 @endsection

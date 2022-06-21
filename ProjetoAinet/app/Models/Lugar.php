@@ -10,6 +10,7 @@ class Lugar extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    public $timestamps = false;
 
     protected $table="lugares"; //se nome da tabela não corresponder ao plural do modelo
     //public timestamps= False; a prof disse que é preciso na segunda feira
