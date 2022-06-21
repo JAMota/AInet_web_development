@@ -10,6 +10,7 @@ use App\Http\Controllers\LugarController;
 use App\Http\Controllers\GeneroController;
 use App\Http\Controllers\ReciboController;
 use App\Http\Controllers\SessaoController;
+use App\Http\Controllers\BilheteController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\DashboardController;
@@ -99,19 +100,19 @@ Route::middleware(['auth', 'verified', 'isBloqueado'])->prefix('admin')->name('a
     Route::delete('filmes/{filme}', [FilmeController::class, 'destroy'])->name('filmes.destroy')
         ->middleware('can:delete,filme');
 
-            // lugares
+    // lugares
     Route::get('lugares', [LugarController::class, 'admin'])->name('lugares')
-    ->middleware('can:viewAny,App\Models\Lugar');
-Route::get('lugares/{lugar}/edit', [LugarController::class, 'edit'])->name('lugares.edit')
-    ->middleware('can:view,lugar');
-Route::get('lugares/create', [LugarController::class, 'create'])->name('lugares.create')
-    ->middleware('can:create,App\Models\Lugar');
-Route::post('lugares', [LugarController::class, 'store'])->name('lugares.store')
-    ->middleware('can:create,App\Models\Lugar');
-Route::put('lugares/{lugar}', [LugarController::class, 'update'])->name('lugares.update')
-    ->middleware('can:update,lugar');
-Route::delete('lugares/{lugar}', [LugarController::class, 'destroy'])->name('lugares.destroy')
-    ->middleware('can:delete,lugar');
+        ->middleware('can:viewAny,App\Models\Lugar');
+    Route::get('lugares/{lugar}/edit', [LugarController::class, 'edit'])->name('lugares.edit')
+        ->middleware('can:view,lugar');
+    Route::get('lugares/create', [LugarController::class, 'create'])->name('lugares.create')
+        ->middleware('can:create,App\Models\Lugar');
+    Route::post('lugares', [LugarController::class, 'store'])->name('lugares.store')
+        ->middleware('can:create,App\Models\Lugar');
+    Route::put('lugares/{lugar}', [LugarController::class, 'update'])->name('lugares.update')
+        ->middleware('can:update,lugar');
+    Route::delete('lugares/{lugar}', [LugarController::class, 'destroy'])->name('lugares.destroy')
+        ->middleware('can:delete,lugar');
 
     // admininstração de clientes
     Route::get('clientes', [ClienteController::class, 'admin'])->name('clientes')
@@ -136,17 +137,19 @@ Route::delete('lugares/{lugar}', [LugarController::class, 'destroy'])->name('lug
     Route::get('users/create', [UserController::class, 'create'])->name('users.create')
         ->middleware('can:create');
     Route::post('users', [UserController::class, 'store'])->name('users.store')
-    ->middleware('can:create,isAdmin');
+        ->middleware('can:create,isAdmin');
     Route::put('users/{user}', [UserController::class, 'update'])->name('users.update')
-    ->middleware('can:update,isAdmin');
+        ->middleware('can:update,isAdmin');
     Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy')
-    ->middleware('can:delete,isAdmin');
+        ->middleware('can:delete,isAdmin');
 
 
-    Route::get('configuracao', [ConfiguracaoController::class, 'edit'])->name('configuracao.edit')
-        ->middleware('can:edit');
-    Route::post('precos', [ConfiguracaoController::class, 'update'])->name('configuracao.store')
-    ->middleware('can:create,isAdmin');
+    Route::get('configuracao/edit', [ConfiguracaoController::class, 'edit'])->name('configuracao.edit');
+    Route::put('configuracao', [ConfiguracaoController::class, 'update'])->name('configuracao.update');
+
+    Route::get('bilhetes', [BilheteController::class, 'admin'])->name('bilhetes');
+
+    Route::get('recibos', [ReciboController::class, 'admin'])->name('recibos');
 
 
     Route::delete('users/{user}/foto', [UserController::class, 'destroy_foto'])->name('users.foto.destroy')
@@ -173,5 +176,3 @@ Route::post('/clientes', [ClienteController::class, 'store'])->name('clientes');
 //enviar mail de comfirmação e email com o pdf com receibos
 Route::get('send-email', [MailController::class, 'index']);
 #Route::get('send-email-pdf', [SendEmailController::class, 'index']);
-
-

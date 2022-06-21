@@ -12,7 +12,7 @@ class BilheteController extends Controller
     {
          $qry = Bilhete::with('user');
 
-        return view('bilhete.admin', compact('bilhetes', ''));
+        return view('bilhete.admin', compact('bilhetes'));
     }
 
     public function show(Bilhete $bilhete)
