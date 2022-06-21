@@ -27,6 +27,7 @@ use App\Http\Controllers\DashboardController;
 */
 
 Route::get('/', [FilmeController::class, 'index'])->name('home');
+Route::get('/filmes/{genero}', [FilmeController::class, 'index_all'])->name('filmes.index_all');
 Route::get('filmes/{filme}', [FilmeController::class, 'show'])->name('filmes.show');
 Route::get('sessoes/{sessao}', [SessaoController::class, 'show'])->name('sessoes.show');
 

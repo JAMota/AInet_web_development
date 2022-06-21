@@ -29,7 +29,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="wrap">
                 <div class="nav_list">
                     <ul>
-                        <li><a href="/">Filmes em Cartaz</a></li>
+                        <li><a href="/">Filmes em Exibição</a></li>
                     </ul>
                 </div>
                 <div class="account_desc">

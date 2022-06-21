@@ -20,7 +20,7 @@
             <tr>
                 <th></th>
                 <th>Nome</th>
-                <th>NIF</th>
+                <!--<th>NIF</th> -->
                 <th></th>
             </tr>
         </thead>

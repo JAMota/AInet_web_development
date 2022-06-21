@@ -150,7 +150,7 @@
             <li class="nav-item {{ Route::currentRouteName() == 'admin.generos' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.generos') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Gestao de Salas</span></a>
+                    <span>Gestao de Lugares</span></a>
             </li>
             @endif @endauth
 

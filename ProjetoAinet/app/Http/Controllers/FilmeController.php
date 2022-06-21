@@ -22,7 +22,9 @@ class FilmeController extends Controller
         $filmes = $qry->paginate(10);
         $generos = Genero::pluck('nome', 'code');
 
+
         return view('filmes.admin', compact('filmes','generos','genero'));
+
     }
     public function index(Request $request)
     {
@@ -54,6 +56,41 @@ class FilmeController extends Controller
             compact('ano', 'genero', 'generos','titulo','filmes')
         );
     }
+    public function index_all(Request $request)
+    {
+        $data=Carbon::now()->subMinutes(5)->format('Y-m-d');
+        $horario=Carbon::now()->subMinutes(5)->format('H-i-s');
+
+        $generos = Genero::pluck('nome', 'code');
+
+        $genero = $request->query('genero', ''); //tem de se alterar que admin nao existe
+        $ano = $request->ano ?? '';
+        $titulo = $request->titulo ?? '';
+
+        $filmes=Filme::query();
+
+        if($genero){
+            $filmes->where('genero', $genero);
+        }
+        if($ano){
+            $filmes->where('ano', $ano);
+        }
+        if($titulo){
+            $filmes->where('titulo','like' ,"%$titulo%");
+        }
+
+
+        $code = $request->code;
+
+        $id=Filme::where('genero_code','LIKE', "%$code%")->pluck('id'); //nao conseguimos tornar esta pesquisa dinamica
+        //$filmes_id=Sessao::pluck('filme_id');
+        $filmes = $filmes ->whereIn('id',$id)->get();
+        return view(
+            'filmes.generos',
+            compact('ano', 'genero', 'generos','titulo','filmes')
+        );
+    }
+
     public function edit(Filme $filme)
     {
         $generos = Genero::all();
