@@ -2,7 +2,7 @@
 @section('content')
     <div class="content_top">
         <div class="heading">
-            <h3>Filmes em Exibição</h3>
+            <h3>Filmes</h3>
         </div>
     </div>
     <div class="section group">

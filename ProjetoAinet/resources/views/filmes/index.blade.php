@@ -5,9 +5,9 @@
         <div class="categories">
             <ul>
                 <h3>Generos</h3>
-                <li><a href="http://projetoainet.test/filmes/All">All</a></li>
+                <li><a href="http://projetoainet.test/f/All">All</a></li>
                 @foreach ($generos as $code => $nome)
-                    <li><a href="http://projetoainet.test/filmes/{{$nome}}">{{ $nome }}</a></li>
+                    <li><a href="http://projetoainet.test/f/{{$nome}}">{{ $nome }}</a></li>
                 @endforeach
             </ul>
         </div>
